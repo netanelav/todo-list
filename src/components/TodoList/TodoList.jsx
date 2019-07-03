@@ -5,6 +5,7 @@ class TodoList extends React.Component {
     super();
     this.deleteTodo = this.deleteTodo.bind(this);
     this.doneTodo = this.doneTodo.bind(this);
+    this.returnTodo = this.returnTodo.bind(this);
   }
 
   deleteTodo(e) {
@@ -18,6 +19,13 @@ class TodoList extends React.Component {
     this.props.handleNewDoneTodo(Object.assign({}, this.state));
   }
 
+  returnTodo(e) {
+    let todo = e.target.parentElement;
+    todo.setAttribute("data-type", "todo");
+    this.deleteTodo(e);
+    this.props.handleNewTodo(Object.assign({}, this.state));
+  }
+
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
@@ -27,7 +35,7 @@ class TodoList extends React.Component {
               <input type="image" src="../../images/star.svg" />
               <input onClick={this.doneTodo} type="checkbox" />
               {`Task: ${item.text} Due time: ${item.date}`}
-              <input onClick={this.deleteTodo} type="checkbox" /> delete
+              <button onClick={this.deleteTodo} type="checkbox">X</button>
             </li>
           ))}
         </ul>
@@ -39,9 +47,9 @@ class TodoList extends React.Component {
           {this.props.completed.map((item, index) => (
             <li key={index}>
               <input type="image" src="../../images/star.svg" />
-              <input onClick={this.doneTodo} type="checkbox" />
+              <input onClick={this.returnTodo} type="checkbox" />
               {`Task: ${item.text} Due time: ${item.date}`}
-              <input onClick={this.deleteTodo} type="checkbox" /> delete
+              <button onClick={this.deleteTodo} type="checkbox">X</button>
             </li>
           ))}
         </ul>
