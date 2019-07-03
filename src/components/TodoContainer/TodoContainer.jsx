@@ -7,6 +7,7 @@ class TodoContainer extends React.Component {
   constructor() {
     super();
     this.handleNewTodo = this.handleNewTodo.bind(this);
+    this.handleNewDoneTodo = this.handleNewDoneTodo.bind(this)
     this.state = {
       todos: [
         {
@@ -40,9 +41,9 @@ class TodoContainer extends React.Component {
       <div>
         <h1>Todo List</h1>
         <TodoForm handleNewTodo={this.handleNewTodo} />
-        <TodoList data-type="todo" done={this.handleNewDoneTodo} todos={this.state.todos} />
+        <TodoList data-type="todo" handleNewDoneTodo={this.handleNewDoneTodo} todos={this.state.todos} />
         <h1>Done List</h1>
-        <TodoList data-type="done" done={this.handleNewDoneTodo} completed={this.state.completed} />
+        <TodoList data-type="done" completed={this.state.completed} />
       </div>
     );
   }
