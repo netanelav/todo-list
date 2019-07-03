@@ -1,13 +1,25 @@
 import React from "react";
 import TodoList from "../TodoList/TodoList";
 import TodoForm from "../TodoForm/TodoForm";
+import { doesNotReject } from "assert";
 
 class TodoContainer extends React.Component {
   constructor() {
     super();
     this.handleNewTodo = this.handleNewTodo.bind(this);
     this.state = {
-      todos: []
+      todos: [
+        {
+          text: "todo",
+          date: "4/4/1990"
+        }
+      ],
+      completed: [
+        {
+          text: "done",
+          date: "4/4/1990"
+        }
+      ]
     };
   }
 
@@ -17,11 +29,20 @@ class TodoContainer extends React.Component {
     });
   }
 
+  handleNewDoneTodo(todo){
+    this.setState({
+      completed: [...this.state.completed, todo]
+    });
+  }
+
   render() {
     return (
       <div>
+        <h1>Todo List</h1>
         <TodoForm handleNewTodo={this.handleNewTodo} />
-        <TodoList todos={this.state.todos} />
+        <TodoList data-type="todo" done={this.handleNewDoneTodo} todos={this.state.todos} />
+        <h1>Done List</h1>
+        <TodoList data-type="done" done={this.handleNewDoneTodo} completed={this.state.completed} />
       </div>
     );
   }
