@@ -1,4 +1,7 @@
 import React from "react";
+import $ from 'jquery';
+import star from "../../images/star.svg";
+import starSelected from "../../images/star-selected.png";
 
 class TodoList extends React.Component {
   constructor() {
@@ -6,7 +9,10 @@ class TodoList extends React.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.doneTodo = this.doneTodo.bind(this);
     this.returnTodo = this.returnTodo.bind(this);
+    this.starUnstar = this.starUnstar.bind(this);
   }
+
+  
 
   deleteTodo(e) {
     e.target.parentElement.remove();
@@ -26,15 +32,21 @@ class TodoList extends React.Component {
     this.props.handleNewTodo(Object.assign({}, this.state));
   }
 
+  starUnstar(e) {
+    let list = $(e.target).parents('ul#todo-list') ? "todos" : "completed"
+    let itemIndex = $(e.target).parent().attr('data-key');
+    this.props.handleStarUnstar(list, itemIndex);
+  }
+
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
-        <ul>
+        <ul id="todo-list">
           {this.props.todos.map((item, index) => (
-            <li key={index}>
-              <input type="image" src="../../images/star.svg" />
+            <li data-key={index} key={index}>
+              <input onClick={this.starUnstar} type="image" className="icon" src={item.starred ? starSelected : star} />
               <input onClick={this.doneTodo} type="checkbox" />
-              {`Task: ${item.text} Due time: ${item.date}`}
+              {`${index} Task: ${item.text} Due time: ${item.date}`}
               <button onClick={this.deleteTodo} type="checkbox">X</button>
             </li>
           ))}
@@ -43,7 +55,7 @@ class TodoList extends React.Component {
     }
     if (this.props.completed && this.props.completed.length > 0) {
       return (
-        <ul>
+        <ul id="done-list">
           {this.props.completed.map((item, index) => (
             <li key={index}>
               <input type="image" src="../../images/star.svg" />

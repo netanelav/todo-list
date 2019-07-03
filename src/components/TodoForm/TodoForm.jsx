@@ -8,7 +8,8 @@ class TodoForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.state = {
       text: "",
-      date: ""
+      date: "",
+      starred: false
     };
   }
 
