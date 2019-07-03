@@ -16,9 +16,9 @@ class TodoForm extends React.Component {
     this.props.handleNewTodo(Object.assign({}, this.state));
   }
 
-  handleInputChange(e) {
-    let value = e.target.value;
-    let inputType = e.target.type;
+  handleInputChange(event) {
+    let value = event.target.value;
+    let inputType = event.target.type;
     this.setState({
       [inputType]: value
     });
@@ -28,7 +28,7 @@ class TodoForm extends React.Component {
     return (
       <div>
         <input onChange={this.handleInputChange} type="text" placeholder="Add Todo..."/>
-        <input type="date" />
+        {/* <input type="date" /> */}
         <button onClick={this.handleAddTodo}>Add</button>
       </div>
     );
