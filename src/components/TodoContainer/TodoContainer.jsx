@@ -9,18 +9,8 @@ class TodoContainer extends React.Component {
     this.handleNewTodo = this.handleNewTodo.bind(this);
     this.handleNewDoneTodo = this.handleNewDoneTodo.bind(this)
     this.state = {
-      todos: [
-        {
-          text: "todo",
-          date: "4/4/1990"
-        }
-      ],
-      completed: [
-        {
-          text: "done",
-          date: "4/4/1990"
-        }
-      ]
+      todos: [],
+      completed: []
     };
   }
 
