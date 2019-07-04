@@ -17,14 +17,20 @@ class TodoList extends React.Component {
   }
 
   deleteTodo(event) {
-    let itemIndex = event.target.parentElement.getAttribute("data-key");
+    let itemIndex = parseInt(event.target.parentElement.parentElement.getAttribute("data-key"));
+    console.log("parent element");
+    console.log(event.target.parentElement);
+    console.log("grandparent element");
+    console.log(event.target.parentElement.parentElement);
     let list = $('ul#todo-list').find(event.target).length ? "todos" : "completed";
-    event.target.parentElement.remove();
+    console.log(list, itemIndex)
+    event.target.parentElement.parentElement.remove();
     this.props.handleRemoveItem(list, itemIndex);
   }
 
 
   doneTodo(event) {
+    debugger;
     // let todo = e.target.parentElement;
     // todo.setAttribute("data-type", "done");
     this.deleteTodo(event);
@@ -63,20 +69,20 @@ class TodoList extends React.Component {
             <ul id="todo-list">
               {this.props.todos.map((item, index) => (
                 <li data-key={index} key={index}>
-                <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
-                <span className="checkbox-styled">
-                  <input id={`checkbox${index}`} type="checkbox" style={{borderColor: "red"}} />
-                  <label htmlFor={`checkbox${index}`} onClick={this.doneTodo}></label>
-                </span>
-                <p className="item-title">{`${item.text}`}</p>
-                {/* {`Task: ${item.text} Due time: ${item.date}`} */}
-                <img className="icon remove" onClick={this.deleteTodo} src={deleteicon} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    );
+                  <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
+                  <span className="checkbox-styled">
+                    <input id={`checkbox${index}`} type="checkbox" style={{ borderColor: "red" }} />
+                    <label htmlFor={`checkbox${index}`} onClick={this.doneTodo}></label>
+                  </span>
+                  <p className="item-title">{`${item.text}`}</p>
+                  {/* {`Task: ${item.text} Due time: ${item.date}`} */}
+                  <span><img className="icon remove" onClick={this.deleteTodo} src={deleteicon} /></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      );
     }
     if (this.props.completed && this.props.completed.length > 0) {
       return (
@@ -84,21 +90,21 @@ class TodoList extends React.Component {
           <div className="col col-md-12">
             <ul id="done-list">
               {this.props.completed.map((item, index) => (
-              <li data-key={index} key={index}>
-                <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
-                <span className="checkbox-styled">
-                  <input id={`checkbox${index}`} type="checkbox" style={{borderColor: "red"}} />
-                  <label htmlFor={`checkbox${index}`} onClick={this.returnTodo}></label>
-                </span>
-                <p className="item-title">{`${item.text}`}</p>
-                {/* {`Task: ${item.text} Due time: ${item.date}`} */}
-                <img className="icon remove" onClick={this.deleteTodo} src={deleteicon} />
+                <li data-key={index} key={index}>
+                  <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
+                  <span className="checkbox-styled">
+                    <input id={`checkbox${index}`} type="checkbox" style={{ borderColor: "red" }} />
+                    <label htmlFor={`checkbox${index}`} onClick={this.returnTodo}></label>
+                  </span>
+                  <p className="item-title">{`${item.text}`}</p>
+                  {/* {`Task: ${item.text} Due time: ${item.date}`} */}
+                  <img className="icon remove" onClick={this.deleteTodo} src={deleteicon} />
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        );
+      );
     }
     return <div>Waiting for your todos...</div>;
   }

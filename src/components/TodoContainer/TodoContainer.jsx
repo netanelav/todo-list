@@ -41,7 +41,7 @@ class TodoContainer extends React.Component {
 
   removeItem(list, itemIndex) {
     let newState = Object.assign({}, this.state);
-    newState[list] = newState[list].filter(item=>newState[list].indexOf(item) != itemIndex);
+    newState[list] = newState[list].filter(item=>newState[list].indexOf(item) !== itemIndex);
     console.log(list,itemIndex);
     this.setState(newState);
   }
