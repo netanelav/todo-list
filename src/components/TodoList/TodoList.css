@@ -1,10 +1,25 @@
+
 input, button {
     margin: 0 4px;
+    border-radius: 5px;
+}
+
+.row.no-gutters {
+    margin: 20px 0;
+}
+
+.col, .col-md-12 {
+    padding: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0 15px;
 }
 
 li {
-    background-color: #f4f4f4;
-    font-size: 34px;
+    background-color: #c1f0fa;
+    font-size: 28px;
     text-align: start;
     position: relative;
 }
@@ -15,13 +30,15 @@ input[type=checkbox] {
 
 p.item-title {
     margin-left: 40px;
+    width: calc(100% - 80px);
 }
 
 .checkbox-styled {
     width: 25px;
     margin: 0 6px;
     position: absolute;
-    top: 25%;
+    top: 50%;
+    transform: translateY(-25%);
     display: inline-block;
 }
 
@@ -40,11 +57,11 @@ p.item-title {
     opacity: 0.2;
     content: '';
     position: absolute;
-    width: 9px;
-    height: 5px;
+    width: 12px;
+    height: 8px;
     background: transparent;
     top: 6px;
-    left: 7px;
+    left: 6px;
     border: 3px solid #333;
     border-top: none;
     border-right: none;
@@ -52,11 +69,11 @@ p.item-title {
     transform: rotate(-45deg);
 }
 
-.checkbox-style label:hover::after {
+.checkbox-styled label:hover::after {
     opacity: 0.5;
 }
 
-.checkbox-style input[type=checkbox]:checked + label:after {
+.checkbox-styled input[type=checkbox]:checked + label:after {
     opacity: 1;
 }
 
@@ -71,6 +88,7 @@ p.item-title {
 
 .icon.star {
     left: -40px;
+    transform: translateY(-55%)
 }
 
 .icon.remove {

@@ -1,18 +1,17 @@
-.container {
+.container-fluid {
+    /* text-align: center; */
+    background-color: #BAE1FF;
+    padding: 0;
+}
+
+.form-container {
     text-align: center;
 }
 
-ul {
-    list-style-type: none;
-}
-
-.row {
-    margin: 5%;
-}
-
-.todo-title, .done-title {
-    border: 1px black solid;
-    background: black;
+.title {
+    /* border: 1px black solid; */
+    background: #c3c3f7;
     color: white;
-    font-family: sans-serif;
+    padding: 10px 0 10px 12px;
+
 }

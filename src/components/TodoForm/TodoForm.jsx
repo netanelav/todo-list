@@ -27,7 +27,7 @@ class TodoForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form-container">
         <input className="input" onChange={this.handleInputChange} type="text" placeholder="Add Todo..."/>
         {/* <input type="date" /> */}
         <button className="btn" onClick={this.handleAddTodo}>Add Todo</button>

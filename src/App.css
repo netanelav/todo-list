@@ -1,8 +1,16 @@
-body {
-  width: 100%;
+@import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
+
+
+
+* {
+  font-family: 'Barriecito', cursive;
 }
 
-div.container {
-  margin: 0;
-  background-color: red;
+html {
+  background-color: #f8f8f8;
+  /* background-color: red; */
+}
+
+body {
+  width: 100%;
 }

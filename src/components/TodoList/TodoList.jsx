@@ -17,8 +17,12 @@ class TodoList extends React.Component {
   }
 
   deleteTodo(event) {
+    let itemIndex = event.target.parentElement.getAttribute("data-key");
+    let list = $('ul#todo-list').find(event.target).length ? "todos" : "completed";
     event.target.parentElement.remove();
+    this.props.handleRemoveItem(list, itemIndex);
   }
+
 
   doneTodo(event) {
     // let todo = e.target.parentElement;
@@ -76,7 +80,7 @@ class TodoList extends React.Component {
     }
     if (this.props.completed && this.props.completed.length > 0) {
       return (
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col col-md-12">
             <ul id="done-list">
               {this.props.completed.map((item, index) => (
