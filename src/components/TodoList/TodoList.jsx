@@ -10,22 +10,26 @@ class TodoList extends React.Component {
     this.returnTodo = this.returnTodo.bind(this);
   }
 
-  deleteTodo(e) {
-    e.target.parentElement.remove();
+  deleteTodo(event) {
+    event.target.parentElement.remove();
   } 
 
-  doneTodo(e) {
+  doneTodo(event) {
     // let todo = e.target.parentElement;
     // todo.setAttribute("data-type", "done");
-    this.deleteTodo(e);
+    this.deleteTodo(event);
+    // this.props.handleNewDoneTodo(Object.assign({}, this.props.todos);
+
     this.props.handleNewDoneTodo(Object.assign({}, this.props.todos[this.doneCounter]));
     this.doneCounter ++;
   }
 
-  returnTodo(e) {
+  returnTodo(event) {
     // let todo = e.target.parentElement;
     // todo.setAttribute("data-type", "todo");
-    this.deleteTodo(e);
+    this.deleteTodo(event);
+    // this.props.handleNewTodo(Object.assign({}, this.props.completed));
+
     this.props.handleNewTodo(Object.assign({}, this.props.completed[this.redoCounter]));
     this.redoCounter++;
   }
