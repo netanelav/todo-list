@@ -1,0 +1,9 @@
+input, button {
+    margin: 10px;
+}
+
+.delete {
+    border-radius: 50%;
+    background-color: rgb(196, 49, 49);
+    color: white;
+}
