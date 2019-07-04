@@ -1,4 +1,7 @@
 import React from "react";
+import $ from 'jquery';
+import star from "../../images/star.svg";
+import starSelected from "../../images/star-selected.png";
 
 class TodoList extends React.Component {
   constructor() {
@@ -8,6 +11,7 @@ class TodoList extends React.Component {
     this.deleteTodo = this.deleteTodo.bind(this);
     this.doneTodo = this.doneTodo.bind(this);
     this.returnTodo = this.returnTodo.bind(this);
+    this.starUnstar = this.starUnstar.bind(this);
   }
 
   deleteTodo(event) {
@@ -19,7 +23,6 @@ class TodoList extends React.Component {
     // todo.setAttribute("data-type", "done");
     this.deleteTodo(event);
     // this.props.handleNewDoneTodo(Object.assign({}, this.props.todos);
-
     this.props.handleNewDoneTodo(Object.assign({}, this.props.todos[this.doneCounter]));
     this.doneCounter ++;
   }
@@ -34,15 +37,22 @@ class TodoList extends React.Component {
     this.redoCounter++;
   }
 
+  starUnstar(e) {
+    let list = $(e.target).parents('ul#todo-list') ? "todos" : "completed"
+    let itemIndex = $(e.target).parent().attr('data-key');
+    this.props.handleStarUnstar(list, itemIndex);
+  }
+
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
-        <ul>
+        <ul id="todo-list">
           {this.props.todos.map((item, index) => (
-            <li key={index}>
+            <li data-key={index} key={index}>
+              <input onClick={this.starUnstar} type="image" className="icon" src={item.starred ? starSelected : star} />
               <input onClick={this.doneTodo} type="checkbox" />
-              {`${item.text} Due time: ${item.date}`}
-              <button onClick={this.deleteTodo}>X</button>
+              {`${index} Task: ${item.text} Due time: ${item.date}`}
+              <button onClick={this.deleteTodo} type="checkbox">X</button>
             </li>
           ))}
         </ul>
@@ -50,7 +60,7 @@ class TodoList extends React.Component {
     }
     if (this.props.completed && this.props.completed.length > 0) {
       return (
-        <ul>
+        <ul id="done-list">
           {this.props.completed.map((item, index) => (
             <li key={index}>
               <input onClick={this.returnTodo} type="checkbox" />

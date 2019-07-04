@@ -7,6 +7,7 @@ class TodoContainer extends React.Component {
     super();
     this.handleNewTodo = this.handleNewTodo.bind(this);
     this.handleNewDoneTodo = this.handleNewDoneTodo.bind(this);
+    this.starUnstarItem = this.starUnstarItem.bind(this);
     this.state = {
       todos: [
         {
@@ -29,6 +30,13 @@ class TodoContainer extends React.Component {
     });
   }
 
+  starUnstarItem(list, itemIndex) {
+    let newState = Object.assign({}, this.state);
+    newState[list][itemIndex].starred = !newState[list][itemIndex].starred;
+    console.log(newState[list]);
+    this.setState(newState);
+  }
+
   handleNewDoneTodo(todo) {
     this.setState({
       completed: [...this.state.completed, todo]
@@ -42,6 +50,7 @@ class TodoContainer extends React.Component {
         <TodoForm handleNewTodo={this.handleNewTodo} />
         <TodoList
           // data-type="todo"
+          handleStarUnstar={this.starUnstarItem}
           handleNewDoneTodo={this.handleNewDoneTodo}
           todos={this.state.todos}
         />
