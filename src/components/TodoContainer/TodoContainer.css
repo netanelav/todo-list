@@ -1,18 +1,32 @@
+body {
+    background-color: rgb(219, 226, 226);
+}
+
 .container {
-    text-align: center;
+  text-align: center;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .row {
-    margin: 5%;
+  margin: 1%;
 }
 
-.todo-title, .done-title {
-    border: 1px black solid;
-    background: black;
-    color: white;
-    font-family: sans-serif;
+.todo-title,
+.done-title {
+  border: 1px black solid;
+  background: rgb(39, 39, 39);
+  color: white;
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
+
+.headline {
+  font-size: 45px;
+  margin-top: 10px;
+  text-align: start;
+}
+

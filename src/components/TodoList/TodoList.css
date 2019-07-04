@@ -3,7 +3,7 @@ input, button {
 }
 
 .delete {
-    border-radius: 50%;
+    border-radius: 55%;
     background-color: rgb(196, 49, 49);
     color: white;
 }

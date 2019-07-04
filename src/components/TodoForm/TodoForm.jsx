@@ -9,7 +9,7 @@ class TodoForm extends React.Component {
     this.state = {
       text: "",
       date: "",
-      starred: false
+      // starred: false
     };
   }
 
@@ -29,7 +29,6 @@ class TodoForm extends React.Component {
     return (
       <div>
         <input className="input" onChange={this.handleInputChange} type="text" placeholder="Add Todo..."/>
-        {/* <input type="date" /> */}
         <button className="btn" onClick={this.handleAddTodo}>Add Todo</button>
       </div>
     );

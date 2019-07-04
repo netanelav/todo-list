@@ -20,33 +20,23 @@ class TodoList extends React.Component {
   }
 
   doneTodo(event) {
-    // let todo = e.target.parentElement;
-    // todo.setAttribute("data-type", "done");
+    // let todo = event.target.parentElement;
     this.deleteTodo(event);
-    // this.props.handleNewDoneTodo(Object.assign({}, this.props.todos);
     this.props.handleNewDoneTodo(
-      Object.assign({}, this.props.todos[this.doneCounter])
-    );
+      Object.assign({}, this.props.todos[this.doneCounter]));
     this.doneCounter++;
   }
 
   returnTodo(event) {
-    // let todo = e.target.parentElement;
-    // todo.setAttribute("data-type", "todo");
     this.deleteTodo(event);
-    // this.props.handleNewTodo(Object.assign({}, this.props.completed));
-
     this.props.handleNewTodo(
-      Object.assign({}, this.props.completed[this.redoCounter])
-    );
+      Object.assign({}, this.props.completed[this.redoCounter]));
     this.redoCounter++;
   }
 
   starItem(e) {
     let list = $(e.target).parents("ul#todo-list") ? "todos" : "completed";
-    let itemIndex = $(e.target)
-      .parent()
-      .attr("data-key");
+    let itemIndex = $(e.target).parent().attr("data-key");
     this.props.handleStar(list, itemIndex);
   }
 
@@ -66,10 +56,7 @@ class TodoList extends React.Component {
                   />
                   <input onClick={this.doneTodo} type="checkbox" />
                   {`${item.text}`}
-                  {/* {`${item.text} Due time: ${item.date}`} */}
-                  <button className="delete" onClick={this.deleteTodo} type="checkbox">
-                    X
-                  </button>
+                  <button className="delete" onClick={this.deleteTodo} type="checkbox">X</button>
                 </li>
               ))}
             </ul>
@@ -86,9 +73,7 @@ class TodoList extends React.Component {
                 <li key={index}>
                   <input onClick={this.returnTodo} type="checkbox" />
                   {`${item.text}`}
-                  {/* {`${item.text} Due time: ${item.date}`} */}
                   <button className="delete" onClick={this.deleteTodo}>X</button>
-                  
                 </li>
               ))}
             </ul>

@@ -10,18 +10,8 @@ class TodoContainer extends React.Component {
     this.handleNewDoneTodo = this.handleNewDoneTodo.bind(this);
     this.starItem = this.starItem.bind(this);
     this.state = {
-      todos: [
-        {
-          text: "todo",
-          date: "4/4/1990"
-        }
-      ],
-      completed: [
-        {
-          text: "done",
-          date: "4/4/1990"
-        }
-      ]
+      todos: [],
+      completed: []
     };
   }
 
@@ -47,10 +37,14 @@ class TodoContainer extends React.Component {
   render() {
     return (
       <div className="container">
+        <p className="headline">
+          Todo List App
+          <img className="logo" />
+        </p>
         <div className="row">
           <div className="col col-md-12">
-            <h2 className="todo-title">Todo List</h2>
             <TodoForm className="form" handleNewTodo={this.handleNewTodo} />
+            <h2 className="todo-title">Todo List</h2>
             <TodoList
               className="todo-list"
               data-type="todo"
