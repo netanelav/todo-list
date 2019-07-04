@@ -1,7 +1,8 @@
 import React from "react";
 import $ from 'jquery';
-import star from "../../images/star.svg";
-import starSelected from "../../images/star-selected.png";
+import star from "../../images/star1.png";
+import starSelected from "../../images/star-selected1.png";
+import deleteicon from "../../images/remove1.png";
 
 class TodoList extends React.Component {
   constructor() {
@@ -34,6 +35,7 @@ class TodoList extends React.Component {
 
   starUnstar(e) {
     let list = $(e.target).parents('ul#todo-list') ? "todos" : "completed"
+    console.log(list)
     let itemIndex = $(e.target).parent().attr('data-key');
     this.props.handleStarUnstar(list, itemIndex);
   }
@@ -44,10 +46,10 @@ class TodoList extends React.Component {
         <ul id="todo-list">
           {this.props.todos.map((item, index) => (
             <li data-key={index} key={index}>
-              <input onClick={this.starUnstar} type="image" className="icon" src={item.starred ? starSelected : star} />
+              <img onClick={this.starUnstar} className="icon" src={item.starred ? starSelected : star} />
               <input onClick={this.doneTodo} type="checkbox" />
-              {`${index} Task: ${item.text} Due time: ${item.date}`}
-              <button onClick={this.deleteTodo} type="checkbox">X</button>
+              {`Task: ${item.text} Due time: ${item.date}`}
+              <img className="icon" onClick={this.deleteTodo} type="checkbox" src={deleteicon} />
             </li>
           ))}
         </ul>
@@ -57,11 +59,11 @@ class TodoList extends React.Component {
       return (
         <ul id="done-list">
           {this.props.completed.map((item, index) => (
-            <li key={index}>
-              <input type="image" src="../../images/star.svg" />
-              <input onClick={this.returnTodo} type="checkbox" />
-              {`Task: ${item.text} Due time: ${item.date}`}
-              <button onClick={this.deleteTodo} type="checkbox">X</button>
+          <li data-key={index} key={index}>
+            <img onClick={this.starUnstar} className="icon" src={item.starred ? starSelected : star} />
+            <input onClick={this.returnTodo} type="checkbox" />
+            {`Task: ${item.text} Due time: ${item.date}`}
+            <img className="icon" onClick={this.deleteTodo} type="checkbox" src={deleteicon} />
             </li>
           ))}
         </ul>

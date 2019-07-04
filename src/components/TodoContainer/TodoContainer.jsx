@@ -41,7 +41,7 @@ class TodoContainer extends React.Component {
         <TodoForm handleNewTodo={this.handleNewTodo} />
         <TodoList data-type="todo" handleStarUnstar={this.starUnstarItem} handleNewDoneTodo={this.handleNewDoneTodo} todos={this.state.todos} />
         <h1>Done List</h1>
-        <TodoList handleNewTodo={this.handleNewTodo} data-type="done" completed={this.state.completed} />
+        <TodoList handleNewTodo={this.handleNewTodo}  handleStarUnstar={this.starUnstarItem} data-type="done" completed={this.state.completed} />
       </div>
     );
   }
