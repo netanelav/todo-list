@@ -44,10 +44,7 @@ class TodoList extends React.Component {
   }
 
   starItem(e) {
-    // let list = $(e.target).parents("ul#todo-list") ? "todos" : "completed";
     let list = $('ul#todo-list').find(e.target).length ? "todos" : "completed";
-    console.log("checking of parent");
-    console.log(list)
     let itemIndex = $(e.target)
       .parent()
       .attr("data-key");
@@ -57,16 +54,19 @@ class TodoList extends React.Component {
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col col-md-12">
             <ul id="todo-list">
               {this.props.todos.map((item, index) => (
                 <li data-key={index} key={index}>
-                <img onClick={this.starItem} className="icon" src={item.starred ? starSelected : star} />
-                <input onClick={this.doneTodo} type="checkbox" />
-                {`${item.text}`}
+                <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
+                <span className="checkbox-styled">
+                  <input id={`checkbox${index}`} type="checkbox" style={{borderColor: "red"}} />
+                  <label htmlFor={`checkbox${index}`} onClick={this.doneTodo}></label>
+                </span>
+                <p className="item-title">{`${item.text}`}</p>
                 {/* {`Task: ${item.text} Due time: ${item.date}`} */}
-                <img className="icon" onClick={this.deleteTodo} src={deleteicon} />
+                <img className="icon remove" onClick={this.deleteTodo} src={deleteicon} />
             </li>
           ))}
         </ul>
@@ -81,11 +81,14 @@ class TodoList extends React.Component {
             <ul id="done-list">
               {this.props.completed.map((item, index) => (
               <li data-key={index} key={index}>
-                <img onClick={this.starItem} className="icon" src={item.starred ? starSelected : star} />
-                <input onClick={this.returnTodo} type="checkbox" />
-                {`${item.text}`}
+                <img onClick={this.starItem} className="icon star" src={item.starred ? starSelected : star} />
+                <span className="checkbox-styled">
+                  <input id={`checkbox${index}`} type="checkbox" style={{borderColor: "red"}} />
+                  <label htmlFor={`checkbox${index}`} onClick={this.returnTodo}></label>
+                </span>
+                <p className="item-title">{`${item.text}`}</p>
                 {/* {`Task: ${item.text} Due time: ${item.date}`} */}
-                <img className="icon" onClick={this.deleteTodo} type="checkbox" src={deleteicon} />
+                <img className="icon remove" onClick={this.deleteTodo} src={deleteicon} />
                 </li>
               ))}
             </ul>

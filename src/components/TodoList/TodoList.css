@@ -1,9 +1,78 @@
 input, button {
-    margin: 10px;
+    margin: 0 4px;
 }
 
-.delete {
-    border-radius: 50%;
-    background-color: rgb(196, 49, 49);
-    color: white;
+li {
+    background-color: #f4f4f4;
+    font-size: 34px;
+    text-align: start;
+    position: relative;
 }
+
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+p.item-title {
+    margin-left: 40px;
+}
+
+.checkbox-styled {
+    width: 25px;
+    margin: 0 6px;
+    position: absolute;
+    top: 25%;
+    display: inline-block;
+}
+
+.checkbox-styled label {
+    cursor: pointer;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 0;
+    background: #eee;
+    border:1px solid #ddd;
+}
+
+.checkbox-styled label:after {
+    opacity: 0.2;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 6px;
+    left: 7px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+
+    transform: rotate(-45deg);
+}
+
+.checkbox-style label:hover::after {
+    opacity: 0.5;
+}
+
+.checkbox-style input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 2px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.icon.star {
+    left: -40px;
+}
+
+.icon.remove {
+    right: 4px;
+  }

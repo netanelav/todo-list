@@ -47,8 +47,8 @@ class TodoContainer extends React.Component {
   render() {
     return (
       <div>
-        <div className="container">
-          <div className="row">
+        <div className="container-fluid">
+          <div className="row-no-gutters">
             <div className="col col-md-12">
               <h2 className="todo-title">Todo List</h2>
               <TodoForm className="form" handleNewTodo={this.handleNewTodo} />

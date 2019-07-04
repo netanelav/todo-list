@@ -1,4 +1,8 @@
-.icon {
-  width: 30px;
-  height: 30px;
+body {
+  width: 100%;
+}
+
+div.container {
+  margin: 0;
+  background-color: red;
 }
