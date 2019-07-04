@@ -1,0 +1,9 @@
+.input {
+    width: 50%;
+}
+
+.btn {
+    margin: 5px;
+    background-color: rgb(121, 235, 121);
+    font-weight: bold;
+}

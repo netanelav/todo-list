@@ -1,0 +1,18 @@
+.container {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.row {
+    margin: 5%;
+}
+
+.todo-title, .done-title {
+    border: 1px black solid;
+    background: black;
+    color: white;
+    font-family: sans-serif;
+}
