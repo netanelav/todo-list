@@ -1,62 +1,72 @@
-import React from "react";
+import React, { Component } from "react";
 import "./TodoList.css";
+import "bootstrap/dist/css/bootstrap.css";
 import $ from "jquery";
-import star from "../../images/star.svg";
-import starSelected from "../../images/star-solid.svg";
+import deleteIcon from "../../images/remove.png";
+import todoIcon from "../../images/todo.svg";
+import doneIcon from "../../images/done.svg";
 
-class TodoList extends React.Component {
-  constructor() {
-    super();
-    this.doneCounter = 0;
-    this.redoCounter = 0;
-    this.deleteTodo = this.deleteTodo.bind(this);
-    this.doneTodo = this.doneTodo.bind(this);
-    this.returnTodo = this.returnTodo.bind(this);
-    this.starItem = this.starItem.bind(this);
+class TodoList extends Component {
+  constructor(props) {
+    super(props);
+    this.removeTodo = this.removeTodo.bind(this);
+    this.setDone = this.setDone.bind(this);
+    this.setTodo = this.setTodo.bind(this);
   }
 
-  deleteTodo(event) {
+  removeTodo(event) {
     event.target.parentElement.remove();
   }
 
-  doneTodo(event) {
-    // let todo = event.target.parentElement;
-    this.deleteTodo(event);
-    this.props.handleNewDoneTodo(
-      Object.assign({}, this.props.todos[this.doneCounter]));
-    this.doneCounter++;
+  setDone(event) {
+    let todo = {
+      todo: event.target.parentElement.textContent
+    };
+    this.removeTodo(event);
+    this.props.setDone(todo);
   }
 
-  returnTodo(event) {
-    this.deleteTodo(event);
-    this.props.handleNewTodo(
-      Object.assign({}, this.props.completed[this.redoCounter]));
-    this.redoCounter++;
+  setTodo(event) {
+    let todo = {
+      todo: event.target.parentElement.textContent
+    };
+    this.removeTodo(event);
+    this.props.setTodo(todo);
   }
 
-  starItem(e) {
-    let list = $(e.target).parents("ul#todo-list") ? "todos" : "completed";
-    let itemIndex = $(e.target).parent().attr("data-key");
-    this.props.handleStar(list, itemIndex);
+  setStar(event) {
+    let item = event.target;
+    let li = event.target.parentElement;
+    let ul = event.target.parentElement.parentElement;
+    if (item.classList.contains("star-on")) {
+      item.classList.remove("star-on");
+      $(ul).append(li);
+    } else {
+      item.classList.add("star-on");
+      $(ul).prepend(li);
+    }
   }
 
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
-        <div className="row">
-          <div className="col col-md-12">
+        <div className="row justify-content-center">
+          <div className="col col-md-10">
             <ul id="todo-list">
-              {this.props.todos.map((item, index) => (
-                <li data-key={index} key={index}>
-                  <input
-                    onClick={this.starItem}
-                    type="image"
-                    className="icon"
-                    src={item.starred ? starSelected : star}
+              {this.props.todos.map((todo, i) => (
+                <li key={i}>
+                  <span className="star" onClick={this.setStar} />
+                  <img
+                    className="checked"
+                    onClick={this.setDone}
+                    src={todoIcon}
                   />
-                  <input onClick={this.doneTodo} type="checkbox" />
-                  {`${item.text}`}
-                  <button className="delete" onClick={this.deleteTodo} type="checkbox">X</button>
+                  {`${todo.todo}`}
+                  <img
+                    src={deleteIcon}
+                    className="delete"
+                    onClick={this.removeTodo}
+                  />
                 </li>
               ))}
             </ul>
@@ -66,14 +76,22 @@ class TodoList extends React.Component {
     }
     if (this.props.completed && this.props.completed.length > 0) {
       return (
-        <div className="row">
-          <div className="col col-md-12">
+        <div className="row justify-content-center">
+          <div className="col col-md-10">
             <ul id="done-list">
-              {this.props.completed.map((item, index) => (
-                <li key={index}>
-                  <input onClick={this.returnTodo} type="checkbox" />
-                  {`${item.text}`}
-                  <button className="delete" onClick={this.deleteTodo}>X</button>
+              {this.props.completed.map((todo, i) => (
+                <li key={i}>
+                  <img
+                    className="checked"
+                    onClick={this.setTodo}
+                    src={doneIcon}
+                  />
+                  {`${todo.todo}`}
+                  <img
+                    src={deleteIcon}
+                    className="delete"
+                    onClick={this.removeTodo}
+                  />
                 </li>
               ))}
             </ul>

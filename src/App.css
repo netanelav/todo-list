@@ -1,4 +1,16 @@
-.icon {
-  width: 30px;
-  height: 30px;
+@import url('https://fonts.googleapis.com/css?family=Barriecito&display=swap');
+
+
+
+* {
+  font-family: 'Barriecito', cursive;
+}
+
+html {
+  background-color: #f8f8f8;
+  /* background-color: red; */
+}
+
+body {
+  width: 100%;
 }
