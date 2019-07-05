@@ -19,17 +19,13 @@ class TodoList extends Component {
   }
 
   setDone(event) {
-    let todo = {
-      todo: event.target.parentElement.textContent
-    };
+    let todo = { todo: event.target.parentElement.textContent };
     this.removeTodo(event);
     this.props.setDone(todo);
   }
 
   setTodo(event) {
-    let todo = {
-      todo: event.target.parentElement.textContent
-    };
+    let todo = { todo: event.target.parentElement.textContent };
     this.removeTodo(event);
     this.props.setTodo(todo);
   }
@@ -56,17 +52,9 @@ class TodoList extends Component {
               {this.props.todos.map((todo, i) => (
                 <li key={i}>
                   <span className="star" onClick={this.setStar} />
-                  <img
-                    className="checked"
-                    onClick={this.setDone}
-                    src={todoIcon}
-                  />
+                  <img className="checked" onClick={this.setDone} src={todoIcon}/>
                   {`${todo.todo}`}
-                  <img
-                    src={deleteIcon}
-                    className="delete"
-                    onClick={this.removeTodo}
-                  />
+                  <img src={deleteIcon} className="delete" onClick={this.removeTodo}/>
                 </li>
               ))}
             </ul>
@@ -81,17 +69,9 @@ class TodoList extends Component {
             <ul id="done-list">
               {this.props.completed.map((todo, i) => (
                 <li key={i}>
-                  <img
-                    className="checked"
-                    onClick={this.setTodo}
-                    src={doneIcon}
-                  />
+                  <img className="checked" onClick={this.setTodo} src={doneIcon}/>
                   {`${todo.todo}`}
-                  <img
-                    src={deleteIcon}
-                    className="delete"
-                    onClick={this.removeTodo}
-                  />
+                  <img src={deleteIcon} className="delete" onClick={this.removeTodo}/>
                 </li>
               ))}
             </ul>

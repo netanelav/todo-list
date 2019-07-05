@@ -52,34 +52,18 @@ class Container extends Component {
           <p className="headline">Todo List</p>
         </div>
       <div className="container">
-        <input
-          id="userInput"
-          className="input"
-          onChange={this.createTodo}
-          type="text"
-          placeholder="Add Your Todo..."
-        />
-        <button className="btn" onClick={this.addTodo}>
-          Add Todo
-        </button>
+        <input id="userInput" className="input" onChange={this.createTodo} type="text" placeholder="Add Your Todo..."/>
+        <button className="btn" onClick={this.addTodo}>Add Todo</button>
         <div className="row">
           <div className="col col-md-12">
             <h2 className="todo-title">Todo List</h2>
-            <TodoList
-              className="todo-list"
-              setDone={this.setDone}
-              todos={this.state.todos}
-            />
+            <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos}/>
           </div>
         </div>
         <div className="row">
           <div className="col col-md-12">
             <h2 className="done-title">Done List</h2>
-            <TodoList
-              className="done-list"
-              setTodo={this.setTodo}
-              completed={this.state.completed}
-            />
+            <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed}/>
           </div>
         </div>
       </div>
