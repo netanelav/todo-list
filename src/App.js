@@ -1,13 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-// import $ from 'jquery';
-import TodoContainer from "./components/TodoContainer/TodoContainer";
+import Container from "./components/Container/Container";
 
 function App() {
   return (
     <div>
-      <TodoContainer />
+      <Container />
     </div>
   );
 }
