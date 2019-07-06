@@ -26,10 +26,13 @@ class Container extends Component {
   }
 
   addTodo() {
-    document.getElementById("userInput").value = "";
-    this.setState({
-      todos: [...this.state.todos, this.state.todo]
-    });
+    if (!document.getElementById("userInput").value == "") {
+      document.getElementById("userInput").value = "";
+      this.setState({
+        todo: "",
+        todos: [...this.state.todos, this.state.todo]
+      });
+    }
   }
 
   setDone(todo) {
@@ -47,26 +50,26 @@ class Container extends Component {
   render() {
     return (
       <React.Fragment>
-      <div className="row title">
+        <div className="row title">
           <img id="logo" src={Logo} />
           <p className="headline">Todo List</p>
         </div>
-      <div className="container">
-        <input id="userInput" className="input" onChange={this.createTodo} type="text" placeholder="Add Your Todo..."/>
-        <button className="btn" onClick={this.addTodo}>Add Todo</button>
-        <div className="row">
-          <div className="col col-md-12">
-            <h2 className="todo-title">Todo List</h2>
-            <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos}/>
+        <div className="container">
+          <input id="userInput" className="input" onChange={this.createTodo} type="text" placeholder="Add Your Todos..."/>
+          <button className="btn" onClick={this.addTodo}>Add Todo</button>
+          <div className="row">
+            <div className="col col-md-12">
+              <h2 className="todo-title">Todo List</h2>
+              <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos}/>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col col-md-12">
+              <h2 className="done-title">Done List</h2>
+              <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed}/>
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col col-md-12">
-            <h2 className="done-title">Done List</h2>
-            <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed}/>
-          </div>
-        </div>
-      </div>
       </React.Fragment>
     );
   }
