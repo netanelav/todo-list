@@ -36,7 +36,12 @@ class TodoList extends Component {
     let ul = event.target.parentElement.parentElement;
     if (item.classList.contains("star-on")) {
       item.classList.remove("star-on");
-      $(ul).append(li);
+      let list = $(ul).find("li");
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].firstChild.classList.contains("star-on")) {
+          $(li).insertAfter($(ul).find("li")[i]);
+        }
+      }
     } else {
       item.classList.add("star-on");
       $(ul).prepend(li);
