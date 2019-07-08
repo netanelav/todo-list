@@ -7,32 +7,65 @@ import Logo from "../../images/list.svg";
 class Container extends Component {
   constructor(props) {
     super(props);
+    this.placeholder = "Add Your Todos...";
+    this.getTodo = this.getTodo.bind(this);
+    this.getDate = this.getDate.bind(this);
+    this.formatCurrentDate = this.formatCurrentDate.bind(this);
     this.addTodo = this.addTodo.bind(this);
+    this.setDate = this.setDate.bind(this);
     this.setDone = this.setDone.bind(this);
     this.setTodo = this.setTodo.bind(this);
-    this.createTodo = this.createTodo.bind(this);
     this.state = {
       todos: [],
       completed: [],
-      todo: {}
+      todo: {
+        id: Date.now(),
+        text: null,
+        date: null,
+        creation: this.formatCurrentDate(new Date()),
+        isStar: false
+      }
     };
   }
 
-  createTodo(event) {
-    let value = { todo: event.target.value };
+  getTodo(event) {
+    let newTodo = { ...this.state.todo };
+    newTodo.text = event.target.value;
     this.setState({
-      todo: value
+      todo: newTodo
     });
   }
 
+  getDate(event) {
+    let newTodo = { ...this.state.todo };
+    newTodo.date = this.setDate(event.target.value);
+    this.setState({
+      todo: newTodo
+    });
+  }
+
+  formatCurrentDate(date) {
+    let formattedDate = `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+    return formattedDate;
+  }
+
   addTodo() {
-    if (!document.getElementById("userInput").value == "") {
-      document.getElementById("userInput").value = "";
+    if (!document.getElementById("input").value == "") {
+      document.getElementById("input").value = "";
+      document.getElementById("input-date").value = "";
       this.setState({
-        todo: "",
         todos: [...this.state.todos, this.state.todo]
       });
     }
+  }
+
+  setDate(date) {
+    let day = date.substring(8, 10);
+    let month = date.substring(5, 7);
+    let year = date.substring(0, 4);
+    let dueDate = `${day}/${month}/${year}`;
+    return dueDate;
   }
 
   setDone(todo) {
@@ -55,18 +88,34 @@ class Container extends Component {
           <p className="headline">Todo List</p>
         </div>
         <div className="container">
-          <input id="userInput" className="input" onChange={this.createTodo} type="text" placeholder="Add Your Todos..."/>
-          <button className="btn" onClick={this.addTodo}>Add Todo</button>
+          <input
+            id="input"
+            type="text"
+            placeholder={this.placeholder}
+            onChange={this.getTodo}
+          />
+          <input id="input-date" type="date" onChange={this.getDate} />
+          <button className="btn" onClick={this.addTodo}>
+            Add Todo
+          </button>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="todo-title">Todo List</h2>
-              <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos}/>
+              <TodoList
+                className="todo-list"
+                setDone={this.setDone}
+                todos={this.state.todos}
+              />
             </div>
           </div>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="done-title">Done List</h2>
-              <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed}/>
+              <TodoList
+                className="done-list"
+                setTodo={this.setTodo}
+                completed={this.state.completed}
+              />
             </div>
           </div>
         </div>
