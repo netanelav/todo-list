@@ -16,6 +16,7 @@ class Container extends Component {
     this.setDate = this.setDate.bind(this);
     this.setDone = this.setDone.bind(this);
     this.setTodo = this.setTodo.bind(this);
+    // this.removeFromTodo = this.removeFromTodo.bind(this);
     this.state = {
       todos: [],
       completed: [],
@@ -53,7 +54,7 @@ class Container extends Component {
   }
 
   addTodo() {
-    this.counter ++;
+    this.counter++;
     if (!document.getElementById("input").value == "") {
       document.getElementById("input").value = "";
       document.getElementById("input-date").value = "";
@@ -83,6 +84,17 @@ class Container extends Component {
     });
   }
 
+  // removeFromTodo(todo) {
+  //   let index = this.state.todos.findIndex(obj => obj.id == todo.id);
+  //   let filteredArray = this.state.todos.slice(index);
+  //   console.log(index);
+  //   console.log(filteredArray);
+  //   console.log(this.state.todos);
+  //   this.setState({
+  //     todos: filteredArray
+  //   });
+  // }
+
   render() {
     return (
       <React.Fragment>
@@ -108,6 +120,7 @@ class Container extends Component {
                 className="todo-list"
                 setDone={this.setDone}
                 todos={this.state.todos}
+                // remove={this.removeFromTodo}
               />
             </div>
           </div>
