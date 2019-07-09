@@ -7,6 +7,7 @@ import Logo from "../../images/list.svg";
 class Container extends Component {
   constructor(props) {
     super(props);
+    this.counter = 0;
     this.placeholder = "Add Your Todos...";
     this.getTodo = this.getTodo.bind(this);
     this.getDate = this.getDate.bind(this);
@@ -19,7 +20,7 @@ class Container extends Component {
       todos: [],
       completed: [],
       todo: {
-        id: Date.now(),
+        id: null,
         text: null,
         date: null,
         creation: this.formatCurrentDate(new Date()),
@@ -31,6 +32,7 @@ class Container extends Component {
   getTodo(event) {
     let newTodo = { ...this.state.todo };
     newTodo.text = event.target.value;
+    newTodo.id = this.counter;
     this.setState({
       todo: newTodo
     });
@@ -51,6 +53,7 @@ class Container extends Component {
   }
 
   addTodo() {
+    this.counter ++;
     if (!document.getElementById("input").value == "") {
       document.getElementById("input").value = "";
       document.getElementById("input-date").value = "";

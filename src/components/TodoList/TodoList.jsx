@@ -42,7 +42,7 @@ class TodoList extends Component {
       // }
     } else {
       item.classList.add("star-on");
-      console.log(todo.id);
+      console.log(todo);
       let index = this.props.todos.findIndex(elm => elm.id === todo.id);
       console.log(index)
       // console.log(this.props.todos.find(todo.id));
