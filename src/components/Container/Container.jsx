@@ -55,9 +55,10 @@ class Container extends Component {
 
   addTodo() {
     this.counter++;
-    if (!document.getElementById("input").value == "") {
-      document.getElementById("input").value = "";
-      document.getElementById("input-date").value = "";
+    if (!this.input == "") {
+      this.input.value = "";
+      this.inputDate.value = "";
+      this.input.focus();
       this.setState({
         todos: [...this.state.todos, this.state.todo]
       });
@@ -108,8 +109,9 @@ class Container extends Component {
             type="text"
             placeholder={this.placeholder}
             onChange={this.getTodo}
+            ref={(el) => { this.input = el; }}
           />
-          <input id="input-date" type="date" onChange={this.getDate} />
+          <input id="input-date" type="date" onChange={this.getDate}  ref={(el) => { this.inputDate = el; }} />
           <button className="btn" onClick={this.addTodo}>
             Add Todo
           </button>
