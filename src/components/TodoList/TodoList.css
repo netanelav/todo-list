@@ -3,7 +3,8 @@ li {
   display: flex;
   margin: 5px;
   background-color: lightgray;
-  font-family: cursive;
+  /* font-family: cursive; */
+  font-family: 'Lato', sans-serif;
   padding: 4px;
   font-size: 19px;
 }
@@ -17,11 +18,20 @@ button {
   margin: 10px;
 }
 
-.delete {
+.creation {
   margin-left: auto;
-  margin-right: 5px;
-  width: 25px;
-  height: 25px;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.delete {
+  /* margin-left: auto; */
+  /* margin-right: 5px; */
+  /* width: 25px;
+  height: 25px; */
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .checked {
@@ -34,9 +44,13 @@ button {
   background-image: url("../../images/star.svg");
   background-size: contain;
   background-repeat: no-repeat;
-  width: 28px;
+  /* width: 28px;
   height: 28px;
-  margin-right: 10px;
+  margin-right: 10px; */
+  width: 23px;
+  height: 23px;
+  /* margin-right: 0px; */
+  margin-left: 5px;
 }
 
 .star-on {

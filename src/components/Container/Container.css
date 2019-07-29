@@ -1,6 +1,7 @@
 body {
   background-color: rgb(219, 226, 226);
-  font-family: cursive;
+  /* font-family: cursive; */
+  font-family: 'Lato', sans-serif;
 }
 
 .container {
@@ -21,14 +22,24 @@ ul {
   list-style-type: none;
 }
 
+input[type="date"] {
+  font-size: 18px;
+  border: 1px solid #ecf0f1;
+  background: #e6ebec;
+  color: #95a5a6;
+  text-align: center
+}
+
+
 .todo-title,
 .done-title {
   color: #32BA7C;
-  font-family: cursive;
+  /* font-family: cursive; */
+  font-family: 'Lato', sans-serif;
   margin-top: 10px;
   margin-bottom: 10px;
   text-decoration: underline;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .todo-title{
