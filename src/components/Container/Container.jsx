@@ -11,12 +11,12 @@ class Container extends Component {
     this.placeholder = "Add a to-do...";
     this.getTodo = this.getTodo.bind(this);
     this.getDate = this.getDate.bind(this);
-    this.formatCurrentDate = this.formatCurrentDate.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.setDate = this.setDate.bind(this);
     this.setDone = this.setDone.bind(this);
     this.setTodo = this.setTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.formatDate = this.formatDate.bind(this);
     this.state = {
       todos: [],
       completed: [],
@@ -24,7 +24,7 @@ class Container extends Component {
         id: null,
         text: null,
         date: null,
-        creation: this.formatCurrentDate(new Date()),
+        creation: this.formatDate(new Date()),
         isStar: false
       }
     };
@@ -47,7 +47,7 @@ class Container extends Component {
     });
   }
 
-  formatCurrentDate(date) {
+  formatDate(date) {
     let formattedDate = `${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`;
     return formattedDate;
   }
@@ -73,33 +73,27 @@ class Container extends Component {
   }
 
   setDone(todo) {
-    this.setState({
-      completed: [...this.state.completed, todo]
-    });
+    this.setState({completed: [...this.state.completed, todo]});
+    this.removeTodo(todo) 
   }
 
   setTodo(todo) {
-    this.setState({
-      todos: [...this.state.todos, todo]
-    });
+    this.setState({todos: [...this.state.todos, todo]});
+    this.removeDone(todo)
   }
 
   removeTodo(todo) {
     let copiedArray = [...this.state.todos]
     let index = copiedArray.findIndex(obj => obj.id == todo.id);
     copiedArray.splice(index, 1);
-    this.setState({
-      todos: [...copiedArray]
-    });
+    this.setState({todos: [...copiedArray]});
   }
-// Fix
+
   removeDone(todo) {
     let copiedArray = [...this.state.completed]
     let index = copiedArray.findIndex(obj => obj.id == todo.id);
     copiedArray.splice(index, 1);
-    this.setState({
-      completed: [...copiedArray]
-    });
+    this.setState({completed: [...copiedArray]});
   }
 
   render() {
@@ -117,13 +111,13 @@ class Container extends Component {
           </button>
           <div className="row">
             <div className="col col-md-12">
-              <h2 className="todo-title">To-do List</h2>
+              <h2 className="todo-title">TO-DOS</h2>
               <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos} remove={this.removeTodo}/>
             </div>
           </div>
           <div className="row">
             <div className="col col-md-12">
-              <h2 className="done-title">Completed To-dos ({this.state.completed.length})</h2>
+              <h2 className="done-title">COMPLETED ({this.state.completed.length})</h2>
               <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed} remove={this.removeDone}/>
             </div>
           </div>

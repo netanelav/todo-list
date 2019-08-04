@@ -17,10 +17,7 @@ class TodoList extends Component {
   }
 
   removeTodo(todo) {
-    // let index = this.props.todos.findIndex(obj => obj.id == todo.id);
-    // let filteredArray = this.props.todos.slice(index);
     this.props.remove(todo);
-    // e.target.parentElement.remove();
   }
 
   removeDone(todo) {
@@ -30,13 +27,11 @@ class TodoList extends Component {
     // e.target.parentElement.remove();
   }
 
-  setDone(e, todo) {
-    this.removeTodo(e);
+  setDone(todo) {
     this.props.setDone(todo);
   }
 
-  setTodo(e, todo) {
-    this.removeTodo(e);
+  setTodo(todo) {
     this.props.setTodo(todo);
   }
 
@@ -63,6 +58,7 @@ class TodoList extends Component {
     }
   }
 
+  // bootstrap
   render() {
     if (this.props.todos && this.props.todos.length > 0) {
       return (
@@ -73,8 +69,8 @@ class TodoList extends Component {
                 <li key={i}>
                   <span className="star" onClick={e => this.setStar(e, todo)} />
                   {/* <img className="checked" onClick={e => this.setDone(e, todo)} src={todoIcon}/> */}
-                  <input type="checkbox" onClick={e => this.setDone(e, todo)}></input>
-                  {`${todo.text}  due Date: ${todo.date} `}
+                  <input type="checkbox" onClick={e => this.setDone(todo)}></input>
+                  {`${todo.text} - due date: ${todo.date} `}
                   <span className="creation">({todo.creation})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.removeTodo(todo)} />
                 </li>))}
@@ -91,8 +87,8 @@ class TodoList extends Component {
               {this.props.completed.map((todo, i) => (
                 <li key={i}>
                   {/* <img className="checked" onClick={e => this.setTodo(e, todo)} src={doneIcon}/> */}
-                  <input type="checkbox" checked onClick={e => this.setTodo(e, todo)}></input>
-                  {`${todo.text}  due Date: ${todo.date} `}
+                  <input type="checkbox" checked onChange={e => this.setTodo(todo)}></input>
+                  {`${todo.text}  - due date: ${todo.date} `}
                   <span className="creation">({todo.creation})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.removeDone(todo)}/>
                 </li>
