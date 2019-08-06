@@ -16,6 +16,7 @@ class Container extends Component {
     this.setDone = this.setDone.bind(this);
     this.setTodo = this.setTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.removeDone = this.removeDone.bind(this);
     this.formatDate = this.formatDate.bind(this);
     this.state = {
       todos: [],
@@ -106,9 +107,7 @@ class Container extends Component {
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} onChange={this.getTodo} ref={(el) => {this.input = el;}}/>
           <input id="input-date" type="date" onChange={this.getDate}  ref={(el) => {this.inputDate = el;}} />
-          <button className="btn" onClick={this.addTodo}>
-            Add Todo
-          </button>
+          <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="todo-title">TO-DOS</h2>

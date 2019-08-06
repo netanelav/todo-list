@@ -40,6 +40,10 @@ button {
   margin-right: 10px;
 }
 
+.completed {
+  text-decoration: line-through;
+}
+
 .star {
   background-image: url("../../images/star.svg");
   background-size: contain;

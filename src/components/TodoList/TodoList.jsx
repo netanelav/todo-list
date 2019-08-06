@@ -2,29 +2,19 @@ import React, { Component } from "react";
 import "./TodoList.css";
 import "bootstrap/dist/css/bootstrap.css";
 import $ from "jquery";
-// import deleteIcon from "../../images/remove.png";
 import deleteIcon from "../../images/garbage.svg";
-// import todoIcon from "../../images/todo.svg";
-// import doneIcon from "../../images/done.svg";
+
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.removeTodo = this.removeTodo.bind(this);
-    this.removeDone = this.removeDone.bind(this);
+    this.remove = this.remove.bind(this);
     this.setDone = this.setDone.bind(this);
     this.setTodo = this.setTodo.bind(this);
   }
 
-  removeTodo(todo) {
+  remove(todo) {
     this.props.remove(todo);
-  }
-
-  removeDone(todo) {
-    // let index = this.props.todos.findIndex(obj => obj.id == todo.id);
-    // let filteredArray = this.props.todos.slice(index);
-    this.props.remove(todo);
-    // e.target.parentElement.remove();
   }
 
   setDone(todo) {
@@ -51,9 +41,6 @@ class TodoList extends Component {
     } else {
       item.classList.add("star-on");
       todo.isStar = true;
-      // let index = this.props.todos.findIndex(elm => elm.id === todo.id);
-      // let filteredArray = this.props.todos.slice(index);
-      // console.log(filteredArray);
       $(ul).prepend(li);
     }
   }
@@ -68,11 +55,12 @@ class TodoList extends Component {
               {this.props.todos.map((todo, i) => (
                 <li key={i}>
                   <span className="star" onClick={e => this.setStar(e, todo)} />
-                  {/* <img className="checked" onClick={e => this.setDone(e, todo)} src={todoIcon}/> */}
                   <input type="checkbox" onClick={e => this.setDone(todo)}></input>
-                  {`${todo.text} - due date: ${todo.date} `}
+                  <span>{todo.text}</span>
+                  {/* <span>{` due date: ${todo.date} `}</span> */}
+                  {/* {`${todo.text} - due date: ${todo.date} `} */}
                   <span className="creation">({todo.creation})</span>
-                  <img src={deleteIcon} className="delete" onClick={() => this.removeTodo(todo)} />
+                  <img src={deleteIcon} className="delete" onClick={() => this.remove(todo)} />
                 </li>))}
             </ul>
           </div>
@@ -86,11 +74,12 @@ class TodoList extends Component {
             <ul id="done-list">
               {this.props.completed.map((todo, i) => (
                 <li key={i}>
-                  {/* <img className="checked" onClick={e => this.setTodo(e, todo)} src={doneIcon}/> */}
                   <input type="checkbox" checked onChange={e => this.setTodo(todo)}></input>
-                  {`${todo.text}  - due date: ${todo.date} `}
+                  <span className="completed">{todo.text}</span>
+                  {/* <span>{` due date: ${todo.date} `}</span> */}
+                  {/* {`${todo.text}  - due date: ${todo.date} `} */}
                   <span className="creation">({todo.creation})</span>
-                  <img src={deleteIcon} className="delete" onClick={() => this.removeDone(todo)}/>
+                  <img src={deleteIcon} className="delete" onClick={() => this.remove(todo)}/>
                 </li>
               ))}
             </ul>
