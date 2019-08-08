@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Container.css";
 import TodoList from "../TodoList/TodoList";
 import Logo from "../../images/list.svg";
+import * as api from "../../utils/todolistApi";
 
 class Container extends Component {
   constructor(props) {
@@ -31,6 +32,17 @@ class Container extends Component {
     };
   }
 
+  componentDidMount() {
+    api.getTodos(
+      oldTodos => {
+        this.setState({ todos: oldTodos.all });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   getTodo(event) {
     let newTodo = { ...this.state.todo };
     newTodo.text = event.target.value;
@@ -49,7 +61,8 @@ class Container extends Component {
   }
 
   formatDate(date) {
-    let formattedDate = `${date.getDate()}/${date.getMonth() +1}/${date.getFullYear()}`;
+    let formattedDate = `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
     return formattedDate;
   }
 
@@ -59,11 +72,30 @@ class Container extends Component {
       this.input.value = "";
       this.inputDate.value = "";
       this.input.focus();
-      this.setState({
-        todos: [...this.state.todos, this.state.todo]
-      });
     }
+    api.createTodo(this.state.todo,
+      newTodo => {
+        this.setState({
+          todos: [...this.state.todos, newTodo]
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+
+  // addTodo() {
+  //   this.counter++;
+  //   if (!this.input == "") {
+  //     this.input.value = "";
+  //     this.inputDate.value = "";
+  //     this.input.focus();
+  //     this.setState({
+  //       todos: [...this.state.todos, this.state.todo]
+  //     });
+  //   }
+  // }
 
   setDate(date) {
     let day = date.substring(8, 10);
@@ -74,27 +106,27 @@ class Container extends Component {
   }
 
   setDone(todo) {
-    this.setState({completed: [...this.state.completed, todo]});
-    this.removeTodo(todo) 
+    this.setState({ completed: [...this.state.completed, todo] });
+    this.removeTodo(todo);
   }
 
   setTodo(todo) {
-    this.setState({todos: [...this.state.todos, todo]});
-    this.removeDone(todo)
+    this.setState({ todos: [...this.state.todos, todo] });
+    this.removeDone(todo);
   }
 
   removeTodo(todo) {
-    let copiedArray = [...this.state.todos]
+    let copiedArray = [...this.state.todos];
     let index = copiedArray.findIndex(obj => obj.id == todo.id);
     copiedArray.splice(index, 1);
-    this.setState({todos: [...copiedArray]});
+    this.setState({ todos: [...copiedArray] });
   }
 
   removeDone(todo) {
-    let copiedArray = [...this.state.completed]
+    let copiedArray = [...this.state.completed];
     let index = copiedArray.findIndex(obj => obj.id == todo.id);
     copiedArray.splice(index, 1);
-    this.setState({completed: [...copiedArray]});
+    this.setState({ completed: [...copiedArray] });
   }
 
   render() {
@@ -105,19 +137,48 @@ class Container extends Component {
           <p className="headline">Todo List</p>
         </div>
         <div className="container">
-          <input id="input" type="text" placeholder={this.placeholder} onChange={this.getTodo} ref={(el) => {this.input = el;}}/>
-          <input id="input-date" type="date" onChange={this.getDate}  ref={(el) => {this.inputDate = el;}} />
-          <button className="btn" onClick={this.addTodo}>Add Todo</button>
+          <input
+            id="input"
+            type="text"
+            placeholder={this.placeholder}
+            onChange={this.getTodo}
+            ref={el => {
+              this.input = el;
+            }}
+          />
+          <input
+            id="input-date"
+            type="date"
+            onChange={this.getDate}
+            ref={el => {
+              this.inputDate = el;
+            }}
+          />
+          <button className="btn" onClick={this.addTodo}>
+            Add Todo
+          </button>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="todo-title">TO-DOS</h2>
-              <TodoList className="todo-list" setDone={this.setDone} todos={this.state.todos} remove={this.removeTodo}/>
+              <TodoList
+                className="todo-list"
+                setDone={this.setDone}
+                todos={this.state.todos}
+                remove={this.removeTodo}
+              />
             </div>
           </div>
           <div className="row">
             <div className="col col-md-12">
-              <h2 className="done-title">COMPLETED ({this.state.completed.length})</h2>
-              <TodoList className="done-list" setTodo={this.setTodo} completed={this.state.completed} remove={this.removeDone}/>
+              <h2 className="done-title">
+                COMPLETED ({this.state.completed.length})
+              </h2>
+              <TodoList
+                className="done-list"
+                setTodo={this.setTodo}
+                completed={this.state.completed}
+                remove={this.removeDone}
+              />
             </div>
           </div>
         </div>

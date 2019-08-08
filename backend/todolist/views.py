@@ -14,12 +14,13 @@ def get_todos(request):
 
 @require_http_methods(['POST'])
 def create_todo(request):
-    try:
+    # try:
         data = json.loads(request.body)
-        new_todo = Activity(
+        new_todo = Todo(
             text=data["text"],
             date=data["date"])
+
         new_todo.save()
         return JsonResponse(model_to_dict(new_todo), status=201)
-    except Exception as ex:
-        return JsonResponse({"error", ex}, status=500)
+    # except Exception as ex:
+    #     return JsonResponse({"error", ex}, status=500, safe=False)
