@@ -114,11 +114,11 @@ class Container extends Component {
     return dueDate;
   }
 
-  setDone(todo) {
-    api.todoIsCompleted(todo,
+  setDone(todoCompleted) {
+    api.todoIsCompleted(todoCompleted,
       todo => {
         this.setState({ completed: [...this.state.completed, todo] });
-        this.removeTodo(todo);
+        this.removeTodo(todoCompleted);
       },
       error => {
         console.log(error);

@@ -12,7 +12,7 @@ def get_todos(request):
     return JsonResponse({"all": data})
 
 @require_http_methods(['GET'])
-def get_todos(request):
+def get_completed(request):
     data = list(Completed.objects.values())
     return JsonResponse({"all": data})
 
