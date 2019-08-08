@@ -41,6 +41,14 @@ class Container extends Component {
         console.log(error);
       }
     );
+    api.getCompleted(
+      oldCompleted => {
+        this.setState({ completed: oldCompleted.all });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getTodo(event) {
@@ -107,9 +115,21 @@ class Container extends Component {
   }
 
   setDone(todo) {
-    this.setState({ completed: [...this.state.completed, todo] });
-    this.removeTodo(todo);
+    api.todoIsCompleted(todo,
+      todo => {
+        this.setState({ completed: [...this.state.completed, todo] });
+        this.removeTodo(todo);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+
+  // setDone(todo) {
+  //   this.setState({ completed: [...this.state.completed, todo] });
+  //   this.removeTodo(todo);
+  // }
 
   setTodo(todo) {
     this.setState({ todos: [...this.state.todos, todo] });

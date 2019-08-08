@@ -10,6 +10,16 @@ export function getTodos(successCallback, errorCallback) {
     });
 }
 
+export function getCompleted(successCallback, errorCallback) {
+    $.ajax({
+        type: "GET",
+        url: "/",
+        dataType: "json",
+        success: successCallback,
+        error: errorCallback
+    });
+}
+
 export function createTodo(todo, successCallback, errorCallback) {
     $.ajax({    
         type: "POST",
@@ -32,6 +42,16 @@ export function deleteTodo(todo, successCallback, errorCallback) {
     });
 }
 
+export function todoIsCompleted(todo, successCallback, errorCallback) {
+    $.ajax({    
+        type: "POST",
+        url: "/completed",
+        contentType: "application/json",
+        data: JSON.stringify(todo),
+        success: successCallback,
+        error: errorCallback
+    });
+}
 
 function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));

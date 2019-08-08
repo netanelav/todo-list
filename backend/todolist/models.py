@@ -7,5 +7,13 @@ class Todo(models.Model):
     # check again -> null = true
     creation = models.DateTimeField('date published', default=timezone.now)
 
+class Completed(models.Model):
+    text = models.CharField(max_length=500, null=False)
+    date = models.DateTimeField(max_length=200, null=True) 
+    # check again -> null = true
+    creation = models.DateTimeField('date published', default=timezone.now)
+
+
+    
     # def _str_(self):
     #     return self.text

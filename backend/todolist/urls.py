@@ -8,6 +8,7 @@ urlpatterns = [
     # url(r'^create', views.create_todo, name='create_todo'),
     path('create', views.create_todo, name='create_todo'),
     path('delete', views.delete_todo, name='delete_todo'),
+    path('completed', views.completed, name='completed'),
     # url(r'^login', login, name='login'),
     # url(r'^logout', logout, name='logout')
 ]
