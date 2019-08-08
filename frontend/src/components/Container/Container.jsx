@@ -73,7 +73,8 @@ class Container extends Component {
       this.inputDate.value = "";
       this.input.focus();
     }
-    api.createTodo(this.state.todo,
+    api.createTodo(
+      this.state.todo,
       newTodo => {
         this.setState({
           todos: [...this.state.todos, newTodo]
@@ -116,11 +117,25 @@ class Container extends Component {
   }
 
   removeTodo(todo) {
-    let copiedArray = [...this.state.todos];
-    let index = copiedArray.findIndex(obj => obj.id == todo.id);
-    copiedArray.splice(index, 1);
-    this.setState({ todos: [...copiedArray] });
+    api.deleteTodo(todo,
+      todo => {
+        let copiedArray = [...this.state.todos];
+        let index = copiedArray.findIndex(obj => obj.id == todo.id);
+        copiedArray.splice(index, 1);
+        this.setState({ todos: [...copiedArray] });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
+
+  // removeTodo(todo) {
+  //   let copiedArray = [...this.state.todos];
+  //   let index = copiedArray.findIndex(obj => obj.id == todo.id);
+  //   copiedArray.splice(index, 1);
+  //   this.setState({ todos: [...copiedArray] });
+  // }
 
   removeDone(todo) {
     let copiedArray = [...this.state.completed];

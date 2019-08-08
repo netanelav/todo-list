@@ -14,7 +14,7 @@ def get_todos(request):
 
 @require_http_methods(['POST'])
 def create_todo(request):
-    # try:
+    try:
         data = json.loads(request.body)
         new_todo = Todo(
             text=data["text"],
@@ -22,5 +22,21 @@ def create_todo(request):
 
         new_todo.save()
         return JsonResponse(model_to_dict(new_todo), status=201)
-    # except Exception as ex:
-    #     return JsonResponse({"error", ex}, status=500, safe=False)
+    except Exception as ex:
+        return JsonResponse({"error", ex}, status=500, safe=False)
+
+        
+@require_http_methods(['DELETE'])
+def delete_todo(request):
+    try:
+        data = json.loads(request.body)
+        todo_id = data["id"]
+        todo_to_delete = Todo(
+            id=data["id"],
+            text=data["text"],
+            date=data["date"])
+
+        Todo.objects.filter(id=todo_id).delete()
+        return JsonResponse(model_to_dict(todo_to_delete), status=201)
+    except Exception as ex:
+        return JsonResponse({"error", ex}, status=500, safe=False)

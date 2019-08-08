@@ -21,6 +21,18 @@ export function createTodo(todo, successCallback, errorCallback) {
     });
 }
 
+export function deleteTodo(todo, successCallback, errorCallback) {
+    $.ajax({    
+        type: "DELETE",
+        url: "/delete",
+        contentType: "application/json",
+        data: JSON.stringify(todo),
+        success: successCallback,
+        error: errorCallback
+    });
+}
+
+
 function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
