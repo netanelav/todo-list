@@ -1,6 +1,5 @@
 body {
   background-color: rgb(219, 226, 226);
-  /* font-family: cursive; */
   font-family: 'Lato', sans-serif;
 }
 
@@ -35,8 +34,7 @@ input[type="date"] {
 .done-title {
   color: #32BA7C;
   font-family: 'Lato', sans-serif;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0px;
   text-decoration: underline;
   font-size: 27px;
 }
@@ -47,7 +45,7 @@ input[type="date"] {
 
 .headline {
   font-weight: bold;
-  font-size: 55px;
+  font-size: 50px;
   margin-top: 10px;
   text-align: start;
   color:#556080;

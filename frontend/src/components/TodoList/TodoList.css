@@ -1,12 +1,11 @@
 li {
   align-items: center;
   display: flex;
-  margin: 5px;
+  margin: 4px;
   background-color: lightgray;
-  /* font-family: cursive; */
   font-family: 'Lato', sans-serif;
-  padding: 4px;
-  font-size: 19px;
+  padding: 2px;
+  font-size: 17px;
 }
 
 li:hover {
@@ -20,16 +19,15 @@ button {
 
 .creation {
   margin-left: auto;
-  margin-right: 15px;
   font-size: 16px;
 }
 
+.due-date {
+  margin-left: 5%;
+}
+
 .delete {
-  /* margin-left: auto; */
-  /* margin-right: 5px; */
-  /* width: 25px;
-  height: 25px; */
-  margin-right: 10px;
+  margin: 0px 5px;
   width: 20px;
   height: 20px;
 }
@@ -48,15 +46,11 @@ button {
   background-image: url("../../images/star.svg");
   background-size: contain;
   background-repeat: no-repeat;
-  /* width: 28px;
-  height: 28px;
-  margin-right: 10px; */
   width: 23px;
   height: 23px;
-  /* margin-right: 0px; */
   margin-left: 5px;
 }
 
-.star-on {
+.starred {
   background-image: url("../../images/star-selected.svg");
 }

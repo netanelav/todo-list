@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from .models import Todo, Completed
+from .models import Todo
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 import json
@@ -9,12 +9,7 @@ import json
 @require_http_methods(['GET'])
 def get_todos(request):
     data = list(Todo.objects.values())
-    return JsonResponse({"all": data})
-
-@require_http_methods(['GET'])
-def get_completed(request):
-    data = list(Completed.objects.values())
-    return JsonResponse({"all": data})
+    return JsonResponse({"todos": data})
 
 @require_http_methods(['POST'])
 def create_todo(request):
@@ -39,6 +34,7 @@ def delete_todo(request):
             id=data["id"],
             text=data["text"],
             date=data["date"])
+            # isCompleted=data["isCompleted"])
 
         Todo.objects.filter(id=todo_id).delete()
         return JsonResponse(model_to_dict(todo_to_delete), status=201)
@@ -50,9 +46,10 @@ def delete_todo(request):
 def completed(request):
     # try:
         data = json.loads(request.body)
-        todo_completed = Completed(
+        todo_completed = Todo(
             text=data["text"],
-            date=data["date"])
+            date=data["date"],
+            isCompleted=True)
 
         todo_completed.save()
         return JsonResponse(model_to_dict(todo_completed), status=201)

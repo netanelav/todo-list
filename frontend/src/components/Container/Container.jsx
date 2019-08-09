@@ -3,47 +3,42 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Container.css";
 import TodoList from "../TodoList/TodoList";
 import Logo from "../../images/list.svg";
-import * as api from "../../utils/todolistApi";
+import * as api from "../../utils/todolistApi"
 
 class Container extends Component {
   constructor(props) {
     super(props);
-    this.counter = 0;
+    this.id = 0;
     this.placeholder = "Add a to-do...";
     this.getTodo = this.getTodo.bind(this);
     this.getDate = this.getDate.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.setDate = this.setDate.bind(this);
-    this.setDone = this.setDone.bind(this);
-    this.setTodo = this.setTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
-    this.removeDone = this.removeDone.bind(this);
+    this.handleStatus = this.handleStatus.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     this.formatDate = this.formatDate.bind(this);
+    this.getCompleted = this.getCompleted.bind(this);
+    this.getTodos = this.getTodos.bind(this);
+    this.clearInputs = this.clearInputs.bind(this)
+
     this.state = {
       todos: [],
-      completed: [],
       todo: {
         id: null,
         text: null,
         date: null,
         creation: this.formatDate(new Date()),
-        isStar: false
+        isStar: false,
+        isCompleted: false
       }
     };
   }
 
+  
   componentDidMount() {
     api.getTodos(
       oldTodos => {
-        this.setState({ todos: oldTodos.all });
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    api.getCompleted(
-      oldCompleted => {
-        this.setState({ completed: oldCompleted.all });
+        this.setState({ todos: oldTodos.todos });
       },
       error => {
         console.log(error);
@@ -54,18 +49,34 @@ class Container extends Component {
   getTodo(event) {
     let newTodo = { ...this.state.todo };
     newTodo.text = event.target.value;
-    newTodo.id = this.counter;
-    this.setState({
-      todo: newTodo
-    });
+    newTodo.isCompleted = false;
+    newTodo.id = this.id;
+    this.setState({ todo: newTodo });
+  }
+
+  addTodo() {
+    this.id++;
+    if (!this.input == "") {
+      this.clearInputs();
+    }
+    api.createTodo( this.state.todo,
+      newTodo => {
+        this.setState({ todos: [...this.state.todos, newTodo] });
+      },
+      error => {console.log(error);}
+    );
+  }
+
+  clearInputs() {
+    this.input.value = "";
+    this.inputDate.value = "";
+    this.input.focus();
   }
 
   getDate(event) {
     let newTodo = { ...this.state.todo };
     newTodo.date = this.setDate(event.target.value);
-    this.setState({
-      todo: newTodo
-    });
+    this.setState({ todo: newTodo });
   }
 
   formatDate(date) {
@@ -73,38 +84,6 @@ class Container extends Component {
       1}/${date.getFullYear()}`;
     return formattedDate;
   }
-
-  addTodo() {
-    this.counter++;
-    if (!this.input == "") {
-      this.input.value = "";
-      this.inputDate.value = "";
-      this.input.focus();
-    }
-    api.createTodo(
-      this.state.todo,
-      newTodo => {
-        this.setState({
-          todos: [...this.state.todos, newTodo]
-        });
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
-  // addTodo() {
-  //   this.counter++;
-  //   if (!this.input == "") {
-  //     this.input.value = "";
-  //     this.inputDate.value = "";
-  //     this.input.focus();
-  //     this.setState({
-  //       todos: [...this.state.todos, this.state.todo]
-  //     });
-  //   }
-  // }
 
   setDate(date) {
     let day = date.substring(8, 10);
@@ -114,29 +93,36 @@ class Container extends Component {
     return dueDate;
   }
 
-  setDone(todoCompleted) {
-    api.todoIsCompleted(todoCompleted,
-      todo => {
-        this.setState({ completed: [...this.state.completed, todo] });
-        this.removeTodo(todoCompleted);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+  // change naming
+  handleStatus(todoCompleted) {
+  api.todoIsCompleted(todoCompleted,
+    todo => {
+      todo.isCompleted ? (todo.isCompleted = false) : (todo.isCompleted = true);
+      this.setState({ todos: this.state.todos });
+    },
+    error => {
+      console.log(error);
+    }
+  );
+}
+
+  getTodos() {
+    let todos = [];
+    for (let i = 0; i < this.state.todos.length; i++) {
+      if (!this.state.todos[i].isCompleted) {
+        todos.push(this.state.todos[i]);}}
+    return todos;
   }
 
-  // setDone(todo) {
-  //   this.setState({ completed: [...this.state.completed, todo] });
-  //   this.removeTodo(todo);
-  // }
-
-  setTodo(todo) {
-    this.setState({ todos: [...this.state.todos, todo] });
-    this.removeDone(todo);
+  getCompleted() {
+    let completed = [];
+    for (let i = 0; i < this.state.todos.length; i++) {
+      if (this.state.todos[i].isCompleted) {
+        completed.push(this.state.todos[i]);}}
+    return completed;
   }
 
-  removeTodo(todo) {
+  handleRemove(todo) {
     api.deleteTodo(todo,
       todo => {
         let copiedArray = [...this.state.todos];
@@ -144,24 +130,8 @@ class Container extends Component {
         copiedArray.splice(index, 1);
         this.setState({ todos: [...copiedArray] });
       },
-      error => {
-        console.log(error);
-      }
+      error => {console.log(error);}
     );
-  }
-
-  // removeTodo(todo) {
-  //   let copiedArray = [...this.state.todos];
-  //   let index = copiedArray.findIndex(obj => obj.id == todo.id);
-  //   copiedArray.splice(index, 1);
-  //   this.setState({ todos: [...copiedArray] });
-  // }
-
-  removeDone(todo) {
-    let copiedArray = [...this.state.completed];
-    let index = copiedArray.findIndex(obj => obj.id == todo.id);
-    copiedArray.splice(index, 1);
-    this.setState({ completed: [...copiedArray] });
   }
 
   render() {
@@ -172,48 +142,19 @@ class Container extends Component {
           <p className="headline">Todo List</p>
         </div>
         <div className="container">
-          <input
-            id="input"
-            type="text"
-            placeholder={this.placeholder}
-            onChange={this.getTodo}
-            ref={el => {
-              this.input = el;
-            }}
-          />
-          <input
-            id="input-date"
-            type="date"
-            onChange={this.getDate}
-            ref={el => {
-              this.inputDate = el;
-            }}
-          />
-          <button className="btn" onClick={this.addTodo}>
-            Add Todo
-          </button>
+          <input id="input" type="text" placeholder={this.placeholder} onChange={this.getTodo} ref={el => { this.input = el; }}/>
+          <input id="input-date" type="date" onChange={this.getDate} ref={el => {this.inputDate = el;}}/>
+          <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="todo-title">TO-DOS</h2>
-              <TodoList
-                className="todo-list"
-                setDone={this.setDone}
-                todos={this.state.todos}
-                remove={this.removeTodo}
-              />
+              <TodoList className="todo-list" status={this.handleStatus} todos={this.getTodos()} remove={this.handleRemove}/>
             </div>
           </div>
           <div className="row">
             <div className="col col-md-12">
-              <h2 className="done-title">
-                COMPLETED ({this.state.completed.length})
-              </h2>
-              <TodoList
-                className="done-list"
-                setTodo={this.setTodo}
-                completed={this.state.completed}
-                remove={this.removeDone}
-              />
+              <h2 className="done-title">COMPLETED ({this.getCompleted().length})</h2>
+              <TodoList className="done-list" status={this.handleStatus} completed={this.getCompleted()} remove={this.handleRemove}/>
             </div>
           </div>
         </div>
@@ -223,3 +164,5 @@ class Container extends Component {
 }
 
 export default Container;
+
+

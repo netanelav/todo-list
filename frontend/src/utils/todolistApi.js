@@ -10,16 +10,6 @@ export function getTodos(successCallback, errorCallback) {
     });
 }
 
-export function getCompleted(successCallback, errorCallback) {
-    $.ajax({
-        type: "GET",
-        url: "/",
-        dataType: "json",
-        success: successCallback,
-        error: errorCallback
-    });
-}
-
 export function createTodo(todo, successCallback, errorCallback) {
     $.ajax({    
         type: "POST",
