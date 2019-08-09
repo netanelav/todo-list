@@ -93,17 +93,15 @@ class Container extends Component {
     return dueDate;
   }
 
-  // change naming
-  handleStatus(todoCompleted) {
-  api.todoIsCompleted(todoCompleted,
-    todo => {
-      todo.isCompleted ? (todo.isCompleted = false) : (todo.isCompleted = true);
+  handleStatus(todoToChange) {
+  api.changeStatus(todoToChange,
+    success => {
+      // todo.isCompleted ? (todo.isCompleted = false) : (todo.isCompleted = true);
       this.setState({ todos: this.state.todos });
     },
-    error => {
-      console.log(error);
-    }
+    error => { console.log(error);}
   );
+  this.setState({ todos: this.state.todos });
 }
 
   getTodos() {

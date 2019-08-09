@@ -31,27 +31,32 @@ def delete_todo(request):
         data = json.loads(request.body)
         todo_id = data["id"]
         todo_to_delete = Todo(
-            id=data["id"],
-            text=data["text"],
-            date=data["date"])
-            # isCompleted=data["isCompleted"])
-
+            id=data["id"])
+           
         Todo.objects.filter(id=todo_id).delete()
         return JsonResponse(model_to_dict(todo_to_delete), status=201)
     except Exception as ex:
         return JsonResponse({"error", ex}, status=500, safe=False)
 
 
-@require_http_methods(['POST'])
-def completed(request):
-    # try:
+@require_http_methods(['UPDATE'])
+def change_status(request):
+    try:
         data = json.loads(request.body)
-        todo_completed = Todo(
-            text=data["text"],
-            date=data["date"],
-            isCompleted=True)
-
-        todo_completed.save()
-        return JsonResponse(model_to_dict(todo_completed), status=201)
-    # except Exception as ex:
-        # return JsonResponse({"error", ex}, status=500, safe=False)
+        if(data['isCompleted']):
+            todo_updated = Todo(
+                id=data["id"],
+                text=data["text"],
+                date=data["date"],
+                isCompleted= False)
+        else:
+            todo_updated = Todo(
+                id=data["id"],
+                text=data["text"],
+                date=data["date"],
+                isCompleted= True)
+        
+        todo_updated.save()
+        return JsonResponse(model_to_dict(todo_updated), status=201)
+    except Exception as ex:
+        return JsonResponse({"error", ex}, status=500, safe=False)

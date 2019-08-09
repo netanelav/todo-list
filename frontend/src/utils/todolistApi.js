@@ -32,10 +32,10 @@ export function deleteTodo(todo, successCallback, errorCallback) {
     });
 }
 
-export function todoIsCompleted(todo, successCallback, errorCallback) {
+export function changeStatus(todo, successCallback, errorCallback) {
     $.ajax({    
-        type: "POST",
-        url: "/completed",
+        type: "UPDATE",
+        url: "/status",
         contentType: "application/json",
         data: JSON.stringify(todo),
         success: successCallback,
