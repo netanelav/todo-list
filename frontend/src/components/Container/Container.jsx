@@ -28,8 +28,8 @@ class Container extends Component {
         text: null,
         date: null,
         creation: this.formatDate(new Date()),
-        isStar: false,
-        isCompleted: false
+        starred: false,
+        completed: false
       }
     };
   }
@@ -49,7 +49,7 @@ class Container extends Component {
   getTodo(event) {
     let newTodo = { ...this.state.todo };
     newTodo.text = event.target.value;
-    newTodo.isCompleted = false;
+    newTodo.completed = false;
     newTodo.id = this.id;
     this.setState({ todo: newTodo });
   }
@@ -97,7 +97,7 @@ class Container extends Component {
   getTodos() {
     let todos = [];
     for (let i = 0; i < this.state.todos.length; i++) {
-      if (!this.state.todos[i].isCompleted) {
+      if (!this.state.todos[i].completed) {
         todos.push(this.state.todos[i]);}}
     return todos;
   }
@@ -105,7 +105,7 @@ class Container extends Component {
   getCompleted() {
     let completed = [];
     for (let i = 0; i < this.state.todos.length; i++) {
-      if (this.state.todos[i].isCompleted) {
+      if (this.state.todos[i].completed) {
         completed.push(this.state.todos[i]);}}
     return completed;
   }
@@ -113,7 +113,7 @@ class Container extends Component {
   handleStatus(todoToChange) {
   api.changeStatus(todoToChange,
     success => {
-      todoToChange.isCompleted ? (todoToChange.isCompleted = false) : (todoToChange.isCompleted = true);
+      todoToChange.completed ? (todoToChange.completed = false) : (todoToChange.completed = true);
       this.setState({ todos: this.state.todos });
     },
     error => { console.log(error);}  

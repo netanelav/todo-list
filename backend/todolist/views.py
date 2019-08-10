@@ -43,18 +43,18 @@ def delete_todo(request):
 def change_status(request):
     try:
         data = json.loads(request.body)
-        if(data['isCompleted']):
+        if(data['completed']):
             todo_updated = Todo(
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
-                isCompleted= False)
+                completed= False)
         else:
             todo_updated = Todo(
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
-                isCompleted= True)
+                completed= True)
         
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)
