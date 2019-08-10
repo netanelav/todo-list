@@ -10,6 +10,7 @@ class TodoList extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handlePriority = this.handlePriority.bind(this);
+    this.formatDate = this.formatDate.bind(this)
   }
 
   handleRemove(todo) {
@@ -24,18 +25,26 @@ class TodoList extends Component {
     let item = e.target;
     let li = e.target.parentElement;
     let ul = e.target.parentElement.parentElement;
-    if (todo.isStar) {
+    if (todo.starred) {
       item.classList.remove("starred");
-      todo.isStar = false;
+      todo.starred = false;
       let list = $(ul).find("li");
       for (let i = 0; i < list.length; i++) {
         if (list[i].firstChild.classList.contains("starred")) {
           $(li).insertAfter($(ul).find("li")[i]);}}
     } else {
       item.classList.add("starred");
-      todo.isStar = true;
+      todo.starred = true;
       $(ul).prepend(li);
     }
+  }
+
+  formatDate(date) {
+    let day = date.substring(8, 10);
+    let month = date.substring(5, 7);
+    let year = date.substring(0, 4);
+    let dueDate = `${day}/${month}/${year}`;
+    return dueDate;
   }
 
   render() {
@@ -49,8 +58,8 @@ class TodoList extends Component {
                   <span className="star" onClick={e => this.handlePriority(e, todo)}/>
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.text}</span>
-                  {/* <span className="due-date">{`due date: ${todo.date} `}</span> */}
-                  <span className="creation">({todo.creation})</span>
+                  {/* <span className="due-date">{`due-date: ${this.formatDate(todo.date)}`}</span> */}
+                  <span className="creation">({this.formatDate(todo.creation)})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
             </ul>
@@ -67,7 +76,7 @@ class TodoList extends Component {
                   <input type="checkbox" onChange={() => this.handleStatus(todo)} checked/>
                   <span className="completed">{todo.text}</span>
                   {/* <span>{` due date: ${todo.date} `}</span> */}
-                  <span className="creation">({todo.creation})</span>
+                  <span className="creation">({this.formatDate(todo.creation)})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
             </ul>

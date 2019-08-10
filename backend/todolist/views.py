@@ -6,6 +6,8 @@ from django.forms.models import model_to_dict
 import json
 
 # @login_required
+
+# change - get objects in a certain order / due date or priority
 @require_http_methods(['GET'])
 def get_todos(request):
     data = list(Todo.objects.values())
@@ -32,7 +34,7 @@ def delete_todo(request):
         todo_id = data["id"]
         todo_to_delete = Todo(
             id=data["id"])
-           
+
         Todo.objects.filter(id=todo_id).delete()
         return JsonResponse(model_to_dict(todo_to_delete), status=201)
     except Exception as ex:
@@ -48,14 +50,41 @@ def change_status(request):
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
-                completed= False)
+                starred=data["starred"],
+                completed=False)
         else:
             todo_updated = Todo(
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
-                completed= True)
-        
+                starred=data["starred"],
+                completed=True)
+
+        todo_updated.save()
+        return JsonResponse(model_to_dict(todo_updated), status=201)
+    except Exception as ex:
+        return JsonResponse({"error", ex}, status=500, safe=False)
+
+
+@require_http_methods(['UPDATE'])
+def change_priority(request):
+    try:
+        data = json.loads(request.body)
+        if(data['starred']):
+            todo_updated = Todo(
+                id=data["id"],
+                text=data["text"],
+                date=data["date"],
+                starred=False,
+                completed=data["completed"])
+        else:
+            todo_updated = Todo(
+                id=data["id"],
+                text=data["text"],
+                date=data["date"],
+                starred=True,
+                completed=data["completed"])
+
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)
     except Exception as ex:

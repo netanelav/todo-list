@@ -16,7 +16,7 @@ class Container extends Component {
     this.setDate = this.setDate.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    this.formatDate = this.formatDate.bind(this);
+    // this.formatDate = this.formatDate.bind(this);
     this.getCompleted = this.getCompleted.bind(this);
     this.getTodos = this.getTodos.bind(this);
     this.clearInputs = this.clearInputs.bind(this)
@@ -27,23 +27,20 @@ class Container extends Component {
         id: null,
         text: null,
         date: null,
-        creation: this.formatDate(new Date()),
+        creation: new Date(),
         starred: false,
         completed: false
       }
     };
   }
 
-  
   componentDidMount() {
     api.getTodos(
       oldTodos => {
         this.setState({ todos: oldTodos.todos });
       },
-      error => {
-        console.log(error);
-      }
-    );
+      error => { console.log(error);}
+      );
   }
 
   getTodo(event) {
@@ -79,11 +76,11 @@ class Container extends Component {
     this.setState({ todo: newTodo });
   }
 
-  formatDate(date) {
-    let formattedDate = `${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()}`;
-    return formattedDate;
-  }
+  // formatDate(date) {
+  //   let formattedDate = `${date.getDate()}/${date.getMonth() +
+  //     1}/${date.getFullYear()}`;
+  //   return formattedDate;
+  // }
 
   setDate(date) {
     let day = date.substring(8, 10);
@@ -111,15 +108,14 @@ class Container extends Component {
   }
   
   handleStatus(todoToChange) {
-  api.changeStatus(todoToChange,
-    success => {
-      todoToChange.completed ? (todoToChange.completed = false) : (todoToChange.completed = true);
-      this.setState({ todos: this.state.todos });
-    },
-    error => { console.log(error);}  
-  );
-  // this.setState({ todos: this.state.todos });
-}
+    api.changeStatus(todoToChange,
+      success => {
+        todoToChange.completed ? (todoToChange.completed = false) : (todoToChange.completed = true);
+        this.setState({ todos: this.state.todos });
+      },
+      error => { console.log(error);}  
+    );
+  }
   
   handleRemove(todo) {
     api.deleteTodo(todo,
