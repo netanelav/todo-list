@@ -93,17 +93,7 @@ class Container extends Component {
     return dueDate;
   }
 
-  handleStatus(todoToChange) {
-  api.changeStatus(todoToChange,
-    success => {
-      // todo.isCompleted ? (todo.isCompleted = false) : (todo.isCompleted = true);
-      this.setState({ todos: this.state.todos });
-    },
-    error => { console.log(error);}
-  );
-  this.setState({ todos: this.state.todos });
-}
-
+  
   getTodos() {
     let todos = [];
     for (let i = 0; i < this.state.todos.length; i++) {
@@ -119,7 +109,18 @@ class Container extends Component {
         completed.push(this.state.todos[i]);}}
     return completed;
   }
-
+  
+  handleStatus(todoToChange) {
+  api.changeStatus(todoToChange,
+    success => {
+      todoToChange.isCompleted ? (todoToChange.isCompleted = false) : (todoToChange.isCompleted = true);
+      this.setState({ todos: this.state.todos });
+    },
+    error => { console.log(error);}  
+  );
+  // this.setState({ todos: this.state.todos });
+}
+  
   handleRemove(todo) {
     api.deleteTodo(todo,
       todo => {
