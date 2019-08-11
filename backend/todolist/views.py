@@ -1,18 +1,31 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.forms.models import model_to_dict
 from .models import Todo
 from django.http import JsonResponse
-from django.forms.models import model_to_dict
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views import generic
 import json
 
-# @login_required
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
 
 # change - get objects in a certain order / due date or priority
+
+@login_required
 @require_http_methods(['GET'])
 def get_todos(request):
     data = list(Todo.objects.values())
     return JsonResponse({"todos": data})
 
+@login_required
 @require_http_methods(['POST'])
 def create_todo(request):
     try:
@@ -26,7 +39,7 @@ def create_todo(request):
     except Exception as ex:
         return JsonResponse({"error", ex}, status=500, safe=False)
 
-
+@login_required
 @require_http_methods(['DELETE'])
 def delete_todo(request):
     try:
@@ -40,7 +53,7 @@ def delete_todo(request):
     except Exception as ex:
         return JsonResponse({"error", ex}, status=500, safe=False)
 
-
+@login_required
 @require_http_methods(['UPDATE'])
 def change_status(request):
     try:
@@ -65,7 +78,7 @@ def change_status(request):
     except Exception as ex:
         return JsonResponse({"error", ex}, status=500, safe=False)
 
-
+@login_required
 @require_http_methods(['UPDATE'])
 def change_priority(request):
     try:

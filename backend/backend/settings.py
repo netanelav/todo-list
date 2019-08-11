@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'accounts.apps.AccountsConfig',
     'todolist',
+    # 'accounts',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [FE_BUILD_DIR],
+        'DIRS': [FE_BUILD_DIR, os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +128,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/todolist/login/'
-LOGOUT_REDIRECT_URL = '/todolist/login/'
+LOGIN_REDIRECT_URL = '/todolist'
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
