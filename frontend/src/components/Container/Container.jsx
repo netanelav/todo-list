@@ -15,6 +15,7 @@ class Container extends Component {
     this.addTodo = this.addTodo.bind(this);
     // this.getDate = this.getDate.bind(this);
     // this.setDate = this.setDate.bind(this);
+    this.handlePriority = this.handlePriority.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getTodos = this.getTodos.bind(this);
@@ -111,6 +112,16 @@ class Container extends Component {
     );
   }
   
+  handlePriority(todoToChange) {
+    api.changePriority(todoToChange,
+      success => {
+        todoToChange.starred ? (todoToChange.starred = false) : (todoToChange.starred = true);
+        this.setState({ todos: this.state.todos });
+      },
+      error => { console.log(error);}  
+    );
+  }
+
   handleRemove(todo) {
     api.deleteTodo(todo,
       todo => {
@@ -134,13 +145,13 @@ class Container extends Component {
           <div className="row">
             <div className="col col-md-12">
               <h2 className="todo-title">TO-DOS</h2>
-              <TodoList className="todo-list" status={this.handleStatus} todos={this.getTodos()} remove={this.handleRemove}/>
+              <TodoList className="todo-list" priority={this.handlePriority} status={this.handleStatus} todos={this.getTodos()} remove={this.handleRemove}/>
             </div>
           </div>
           <div className="row">
             <div className="col col-md-12">
               <h2 className="done-title">COMPLETED ({this.getCompleted().length})</h2>
-              <TodoList className="done-list" status={this.handleStatus} completed={this.getCompleted()} remove={this.handleRemove}/>
+              <TodoList className="done-list" priority={this.handlePriority} status={this.handleStatus} completed={this.getCompleted()} remove={this.handleRemove}/>
             </div>
           </div>
         </div>

@@ -8,5 +8,5 @@ urlpatterns = [
     path('delete', views.delete_todo, name='delete_todo'),
     path('status', views.change_status, name='change_status'),
     path('signup/', views.SignUp.as_view(), name='signup'),
-    # path('star', views.change_priority, name='change_priority'),
+    path('star', views.change_priority, name='change_priority'),
 ]

@@ -21,22 +21,23 @@ class TodoList extends Component {
     this.props.status(todo);
   }
 
-  handlePriority(e, todo) {
-    let item = e.target;
-    let li = e.target.parentElement;
-    let ul = e.target.parentElement.parentElement;
-    if (todo.starred) {
-      item.classList.remove("starred");
-      todo.starred = false;
-      let list = $(ul).find("li");
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].firstChild.classList.contains("starred")) {
-          $(li).insertAfter($(ul).find("li")[i]);}}
-    } else {
-      item.classList.add("starred");
-      todo.starred = true;
-      $(ul).prepend(li);
-    }
+  handlePriority(todo) {
+    this.props.priority(todo);
+    // let li = e.target.parentElement;
+    // let ul = e.target.parentElement.parentElement;
+    // if (todo.starred) {
+    //   item.classList.remove("starred");
+    //   todo.starred = false;
+    //   // let list = $(ul).find("li");
+    //   // for (let i = 0; i < list.length; i++) {
+    //   //   if (list[i].firstChild.classList.contains("starred")) {
+    //   //     $(li).insertAfter($(ul).find("li")[i]);}}
+    // } else {
+    //   item.classList.add("starred");
+    //   todo.starred = true;
+    //   // $(ul).prepend(li);
+    // }
+    
   }
 
   formatDate(date) {
@@ -55,7 +56,7 @@ class TodoList extends Component {
             <ul id="todo-list">
               {this.props.todos.map((todo, i) => (
                 <li key={i}>
-                  <span className="star" onClick={e => this.handlePriority(e, todo)}/>
+                  <span className={todo.starred ? "star starred" : "star"} onClick={() => this.handlePriority(todo)}/>
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.text}</span>
                   {/* <span className="due-date">{`due-date: ${this.formatDate(todo.date)}`}</span> */}

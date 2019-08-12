@@ -43,16 +43,16 @@ export function changeStatus(todo, successCallback, errorCallback) {
     });
 }
 
-// export function changePriority(todo, successCallback, errorCallback) {
-//     $.ajax({    
-//         type: "UPDATE",
-//         url: "/star",
-//         contentType: "application/json",
-//         data: JSON.stringify(todo),
-//         success: successCallback,
-//         error: errorCallback
-//     });
-// }
+export function changePriority(todo, successCallback, errorCallback) {
+    $.ajax({    
+        type: "UPDATE",
+        url: "/star",
+        contentType: "application/json",
+        data: JSON.stringify(todo),
+        success: successCallback,
+        error: errorCallback
+    });
+}
 
 function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
