@@ -22,8 +22,8 @@ button {
   font-size: 14px;
 }
 
-.due-date {
-  margin-left: 5%;
+.deadline {
+  font-size: 14px;
 }
 
 .delete {
@@ -42,7 +42,7 @@ button {
   text-decoration: line-through;
 }
 
-.star {
+.default {
   background-image: url("../../images/star.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -51,6 +51,15 @@ button {
   margin-left: 5px;
 }
 
-.starred {
+.favorite {
   background-image: url("../../images/star-selected.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 23px;
+  height: 23px;
+  margin-left: 5px;
+}
+
+.task {
+  font-weight: bold;
 }

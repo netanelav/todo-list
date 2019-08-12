@@ -13,8 +13,6 @@ class Container extends Component {
     this.placeholder = "Add a to-do...";
     this.getTodo = this.getTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
-    // this.getDate = this.getDate.bind(this);
-    // this.setDate = this.setDate.bind(this);
     this.handlePriority = this.handlePriority.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -44,11 +42,12 @@ class Container extends Component {
       );
   }
 
-  getTodo(event) {
+  getTodo() {
     let newTodo = { ...this.state.todo };
-    newTodo.text = event.target.value;
-    newTodo.completed = false;
     newTodo.id = this.id;
+    newTodo.text = this.input.value;
+    newTodo.date = this.inputDate.value;
+    newTodo.completed = false;
     this.setState({ todo: newTodo });
   }
 
@@ -56,13 +55,14 @@ class Container extends Component {
     this.id++;
     if (!this.input == "") {
       this.clearInputs();
+      api.createTodo( this.state.todo,
+        newTodo => {
+          this.setState({ todos: [...this.state.todos, newTodo] });
+        },
+        error => {console.log(error);}
+      );
     }
-    api.createTodo( this.state.todo,
-      newTodo => {
-        this.setState({ todos: [...this.state.todos, newTodo] });
-      },
-      error => {console.log(error);}
-    );
+  // add alert to check validation
   }
 
   clearInputs() {
@@ -70,21 +70,6 @@ class Container extends Component {
     this.inputDate.value = "";
     this.input.focus();
   }
-
-  // getDate(event) {
-  //   let newTodo = { ...this.state.todo };
-  //   newTodo.date = this.setDate(event.target.value);
-  //   this.setState({ todo: newTodo });
-  // }
-
-  // setDate(date) {
-  //   let day = date.substring(8, 10);
-  //   let month = date.substring(5, 7);
-  //   let year = date.substring(0, 4);
-  //   let dueDate = `${day}/${month}/${year}`;
-  //   return dueDate;
-  // }
-
   
   getTodos() {
     let todos = [];
@@ -139,8 +124,8 @@ class Container extends Component {
       <React.Fragment>
       <Headline/>
         <div className="container">
-          <input id="input" type="text" placeholder={this.placeholder} onChange={this.getTodo} ref={el => { this.input = el; }}/>
-          <input id="input-date" type="date" onChange={this.getDate} ref={el => {this.inputDate = el;}}/>
+          <input id="input" type="text" placeholder={this.placeholder} ref={el => {this.input = el;}}/>
+          <input id="input-date" type="date" onChange={this.getTodo} ref={el => {this.inputDate = el;}}/>
           <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">
             <div className="col col-md-12">

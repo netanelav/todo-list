@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./TodoList.css";
 import "bootstrap/dist/css/bootstrap.css";
-import $ from "jquery";
 import deleteIcon from "../../images/garbage.svg";
 
 class TodoList extends Component {
@@ -23,21 +22,6 @@ class TodoList extends Component {
 
   handlePriority(todo) {
     this.props.priority(todo);
-    // let li = e.target.parentElement;
-    // let ul = e.target.parentElement.parentElement;
-    // if (todo.starred) {
-    //   item.classList.remove("starred");
-    //   todo.starred = false;
-    //   // let list = $(ul).find("li");
-    //   // for (let i = 0; i < list.length; i++) {
-    //   //   if (list[i].firstChild.classList.contains("starred")) {
-    //   //     $(li).insertAfter($(ul).find("li")[i]);}}
-    // } else {
-    //   item.classList.add("starred");
-    //   todo.starred = true;
-    //   // $(ul).prepend(li);
-    // }
-    
   }
 
   formatDate(date) {
@@ -56,10 +40,10 @@ class TodoList extends Component {
             <ul id="todo-list">
               {this.props.todos.map((todo, i) => (
                 <li key={i}>
-                  <span className={todo.starred ? "star starred" : "star"} onClick={() => this.handlePriority(todo)}/>
+                  <span className={todo.starred ? "favorite" : "default"} onClick={() => this.handlePriority(todo)}/>
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.text}</span>
-                  {/* <span className="due-date">{`due-date: ${this.formatDate(todo.date)}`}</span> */}
+                  <span className="deadline">{`, target date ${this.formatDate(todo.date)}`}</span>
                   <span className="creation">({this.formatDate(todo.creation)})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
@@ -76,7 +60,6 @@ class TodoList extends Component {
                 <li key={i}>
                   <input type="checkbox" onChange={() => this.handleStatus(todo)} checked/>
                   <span className="completed">{todo.text}</span>
-                  {/* <span>{` due date: ${todo.date} `}</span> */}
                   <span className="creation">({this.formatDate(todo.creation)})</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
