@@ -23,6 +23,7 @@ button {
 }
 
 .deadline {
+  margin-left: auto;
   font-size: 14px;
 }
 

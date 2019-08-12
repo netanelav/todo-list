@@ -3,13 +3,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./Container.css";
 import Headline from "../Headline/Headline";
 import TodoList from "../TodoList/TodoList";
-import Logo from "../../images/list.svg";
 import * as api from "../../utils/todolistApi"
 
 class Container extends Component {
   constructor(props) {
     super(props);
-    this.id = 0;
     this.placeholder = "Add a to-do...";
     this.getTodo = this.getTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
@@ -23,9 +21,8 @@ class Container extends Component {
     this.state = {
       todos: [],
       todo: {
-        id: null,
-        text: null,
-        date: null,
+        task: null,
+        deadline: null,
         creation: new Date(),
         starred: false,
         completed: false
@@ -38,31 +35,28 @@ class Container extends Component {
       oldTodos => {
         this.setState({ todos: oldTodos.todos });
       },
-      error => { console.log(error);}
+      error => { console.log(error); }
       );
   }
 
   getTodo() {
     let newTodo = { ...this.state.todo };
-    newTodo.id = this.id;
-    newTodo.text = this.input.value;
-    newTodo.date = this.inputDate.value;
+    newTodo.task = this.input.value;
+    newTodo.deadline = this.inputDate.value;
     newTodo.completed = false;
     this.setState({ todo: newTodo });
   }
 
   addTodo() {
-    this.id++;
-    if (!this.input == "") {
+    if (this.input.value !== "" && this.inputDate.value !== "") {
       this.clearInputs();
       api.createTodo( this.state.todo,
         newTodo => {
           this.setState({ todos: [...this.state.todos, newTodo] });
         },
-        error => {console.log(error);}
+        error => {console.log(error); }
       );
     }
-  // add alert to check validation
   }
 
   clearInputs() {
@@ -125,6 +119,7 @@ class Container extends Component {
       <Headline/>
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} ref={el => {this.input = el;}}/>
+          <span>target date:</span>
           <input id="input-date" type="date" onChange={this.getTodo} ref={el => {this.inputDate = el;}}/>
           <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">

@@ -30,8 +30,8 @@ def create_todo(request):
         data = json.loads(request.body)
         print(data)
         new_todo = Todo(
-            text=data["text"],
-            date=data["date"],
+            task=data["task"],
+            deadline=data["deadline"],
             user=request.user)
 
         new_todo.save()
@@ -61,16 +61,16 @@ def change_status(request):
         if(data['completed']):
             todo_updated = Todo(
                 id=data["id"],
-                text=data["text"],
-                date=data["date"],
+                task=data["task"],
+                deadline=data["deadline"],
                 starred=data["starred"],
                 completed=False,
                 user=request.user)
         else:
             todo_updated = Todo(
                 id=data["id"],
-                text=data["text"],
-                date=data["date"],
+                task=data["task"],
+                deadline=data["deadline"],
                 starred=data["starred"],
                 completed=True,
                 user=request.user)
@@ -88,16 +88,16 @@ def change_priority(request):
         if(data['starred']):
             todo_updated = Todo(
                 id=data["id"],
-                text=data["text"],
-                date=data["date"],
+                task=data["task"],
+                deadline=data["deadline"],
                 starred=False,
                 completed=data["completed"],
                 user=request.user)
         else:
             todo_updated = Todo(
                 id=data["id"],
-                text=data["text"],
-                date=data["date"],
+                task=data["task"],
+                deadline=data["deadline"],
                 starred=True,
                 completed=data["completed"],
                 user=request.user)

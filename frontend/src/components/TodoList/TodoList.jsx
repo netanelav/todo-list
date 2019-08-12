@@ -42,9 +42,8 @@ class TodoList extends Component {
                 <li key={i}>
                   <span className={todo.starred ? "favorite" : "default"} onClick={() => this.handlePriority(todo)}/>
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
-                  <span className="task">{todo.text}</span>
-                  <span className="deadline">{`, target date ${this.formatDate(todo.date)}`}</span>
-                  <span className="creation">({this.formatDate(todo.creation)})</span>
+                  <span className="task">{todo.task}</span>
+                  <span className="deadline">{`target date ${this.formatDate(todo.deadline)}`}</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
             </ul>
@@ -59,8 +58,8 @@ class TodoList extends Component {
               {this.props.completed.map((todo, i) => (
                 <li key={i}>
                   <input type="checkbox" onChange={() => this.handleStatus(todo)} checked/>
-                  <span className="completed">{todo.text}</span>
-                  <span className="creation">({this.formatDate(todo.creation)})</span>
+                  <span className="completed">{todo.task}</span>
+                  <span className="creation">{`created at ${this.formatDate(todo.creation)}`}</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
                 </li>))}
             </ul>
