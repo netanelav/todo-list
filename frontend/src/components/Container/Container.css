@@ -1,20 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Anton&display=swap);
+
 body {
-  background-color: rgb(219, 226, 226);
-  font-family: 'Lato', sans-serif;
+  background: rgb(219, 226, 226);
+  /* background: #b5ee94; */
+  /* font-family: 'Lato', sans-serif; */
+  font-family: "Roboto", sans-serif;
 }
 
 .container {
   text-align: center;
-}
-
-.title {
-  margin: 15px;
-  margin-top: 0;
-}
-
-#logo {
-  width: 55px;
-  margin-right: 10px;
 }
 
 ul {
@@ -26,30 +21,23 @@ input[type="date"] {
   border: 1px solid #ecf0f1;
   background: #e6ebec;
   color: #95a5a6;
-  text-align: center
+  text-align: center;
 }
-
 
 .todo-title,
 .done-title {
-  color: #32BA7C;
-  font-family: 'Lato', sans-serif;
+  color: #32ba7c;
+  /* font-family: 'Lato', sans-serif; */
+  font-family: "Roboto", sans-serif;
   margin: 10px 0px;
   text-decoration: underline;
   font-size: 27px;
 }
 
-.todo-title{
-  color:#3DB39E;
+.todo-title {
+  color: #3db39e;
 }
 
-.headline {
-  font-weight: bold;
-  font-size: 47px;
-  margin-top: 10px;
-  text-align: start;
-  color:#556080;
-}
 
 #input {
   width: 50%;
@@ -67,11 +55,11 @@ input[type="date"] {
 .btn {
   margin: 5px;
   background-color: rgb(121, 235, 121);
-  color:gray;
+  color: gray;
 }
 
 .btn:hover {
   box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
-  color:black;
-  outline:none;
+  color: black;
+  outline: none;
 }

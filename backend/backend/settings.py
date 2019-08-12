@@ -128,6 +128,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
-LOGIN_REDIRECT_URL = '/todolist'
-LOGIN_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/todolist/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'

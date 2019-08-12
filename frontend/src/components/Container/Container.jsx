@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Container.css";
+import Headline from "../Headline/Headline";
 import TodoList from "../TodoList/TodoList";
 import Logo from "../../images/list.svg";
 import * as api from "../../utils/todolistApi"
@@ -11,14 +12,13 @@ class Container extends Component {
     this.id = 0;
     this.placeholder = "Add a to-do...";
     this.getTodo = this.getTodo.bind(this);
-    this.getDate = this.getDate.bind(this);
     this.addTodo = this.addTodo.bind(this);
-    this.setDate = this.setDate.bind(this);
+    // this.getDate = this.getDate.bind(this);
+    // this.setDate = this.setDate.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
-    // this.formatDate = this.formatDate.bind(this);
-    this.getCompleted = this.getCompleted.bind(this);
     this.getTodos = this.getTodos.bind(this);
+    this.getCompleted = this.getCompleted.bind(this);
     this.clearInputs = this.clearInputs.bind(this)
 
     this.state = {
@@ -70,25 +70,19 @@ class Container extends Component {
     this.input.focus();
   }
 
-  getDate(event) {
-    let newTodo = { ...this.state.todo };
-    newTodo.date = this.setDate(event.target.value);
-    this.setState({ todo: newTodo });
-  }
-
-  // formatDate(date) {
-  //   let formattedDate = `${date.getDate()}/${date.getMonth() +
-  //     1}/${date.getFullYear()}`;
-  //   return formattedDate;
+  // getDate(event) {
+  //   let newTodo = { ...this.state.todo };
+  //   newTodo.date = this.setDate(event.target.value);
+  //   this.setState({ todo: newTodo });
   // }
 
-  setDate(date) {
-    let day = date.substring(8, 10);
-    let month = date.substring(5, 7);
-    let year = date.substring(0, 4);
-    let dueDate = `${day}/${month}/${year}`;
-    return dueDate;
-  }
+  // setDate(date) {
+  //   let day = date.substring(8, 10);
+  //   let month = date.substring(5, 7);
+  //   let year = date.substring(0, 4);
+  //   let dueDate = `${day}/${month}/${year}`;
+  //   return dueDate;
+  // }
 
   
   getTodos() {
@@ -132,10 +126,7 @@ class Container extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="row title">
-          <img id="logo" src={Logo} />
-          <p className="headline">Todo List</p>
-        </div>
+      <Headline/>
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} onChange={this.getTodo} ref={el => { this.input = el; }}/>
           <input id="input-date" type="date" onChange={this.getDate} ref={el => {this.inputDate = el;}}/>

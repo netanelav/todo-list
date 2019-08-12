@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Anton&display=swap);
+
+body {
+  background: rgb(219, 226, 226);
+  /* background: #b5ee94; */
+  /* font-family: 'Lato', sans-serif; */
+  font-family: "Roboto", sans-serif;
+}
+
+.headline {
+  font-weight: bold;
+  font-size: 45px;
+  margin-top: 10px;
+  text-align: start;
+  color: #556080;
+}
+
+.title {
+  margin: 15px;
+  margin-top: 0;
+}
+
+.logout-btn {
+  padding: 8px;
+  font-size: 15px;
+  /* background: rgb(204, 204, 172); */
+  color: black;
+  border-radius: 10%;
+}
+
+.logout-btn:hover {
+  box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
+  color: black;
+  outline: none;
+}
+
+#logo {
+  width: 55px;
+  /* margin-right: 10px; */
+}

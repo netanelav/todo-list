@@ -9,6 +9,4 @@ urlpatterns = [
     path('status', views.change_status, name='change_status'),
     path('signup/', views.SignUp.as_view(), name='signup'),
     # path('star', views.change_priority, name='change_priority'),
-    # url(r'^login', login, name='login'),
-    # url(r'^logout', logout, name='logout')
 ]
