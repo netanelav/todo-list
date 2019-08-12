@@ -8,7 +8,7 @@ class Todo(models.Model):
     creation = models.DateTimeField('date published', default=timezone.now)
     starred = models.BooleanField(default=False)
     completed = models.BooleanField(default=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def _str_(self):
         return self.text

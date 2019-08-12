@@ -17,12 +17,10 @@ class SignUp(generic.CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
 
-# change - get objects in a certain order / due date or priority
-
 @login_required
 @require_http_methods(['GET'])
 def get_todos(request):
-    data = list(Todo.objects.values())
+    data = list(Todo.objects.filter(user=request.user).values())
     return JsonResponse({"todos": data})
 
 @login_required
@@ -32,7 +30,8 @@ def create_todo(request):
         data = json.loads(request.body)
         new_todo = Todo(
             text=data["text"],
-            date=data["date"])
+            date=data["date"],
+            user=request.user)
 
         new_todo.save()
         return JsonResponse(model_to_dict(new_todo), status=201)
@@ -64,14 +63,16 @@ def change_status(request):
                 text=data["text"],
                 date=data["date"],
                 starred=data["starred"],
-                completed=False)
+                completed=False,
+                user=request.user)
         else:
             todo_updated = Todo(
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
                 starred=data["starred"],
-                completed=True)
+                completed=True,
+                user=request.user)
 
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)
@@ -89,14 +90,16 @@ def change_priority(request):
                 text=data["text"],
                 date=data["date"],
                 starred=False,
-                completed=data["completed"])
+                completed=data["completed"],
+                user=request.user)
         else:
             todo_updated = Todo(
                 id=data["id"],
                 text=data["text"],
                 date=data["date"],
                 starred=True,
-                completed=data["completed"])
+                completed=data["completed"],
+                user=request.user)
 
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)

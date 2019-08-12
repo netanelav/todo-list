@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import Logo from "../../images/list.svg";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Headline.css";
-import Logo from "../../images/list.svg";
 
 class Headline extends Component {
   constructor(props) {
@@ -12,14 +12,11 @@ class Headline extends Component {
     return (
       <React.Fragment>
         <div className="row title align-items-center">
-          {/* <div className="col-2">
+          <div className="col-0">
             <img id="logo" src={Logo} />
-          </div> */}
-          <div className="col-4">
-            <p className="headline">Todo List</p>
           </div>
-          <div className="col-1 offset-7">
-            <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
+          <div className="col-5">
+            <p className="headline">Todo List</p>
           </div>
         </div>
       </React.Fragment>

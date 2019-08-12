@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -25,6 +26,8 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <p id="hellouser">Hello {{user}}!</p> -->
+    <a class="logout-btn" href="{% url 'logout' %}">Logout</a>
     <div id="root"></div>
     <!--
       This HTML file is a template.
