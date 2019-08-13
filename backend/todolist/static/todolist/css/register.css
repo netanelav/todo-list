@@ -6,9 +6,7 @@
 }
 
 body {
-  /* background: #329fe7;  */
   background: linear-gradient(to right, rgb(188, 225, 235) 0%, rgb(163, 206, 218) 41%, rgb(150, 194, 206) 100%);
-  /* background: linear-gradient(to left, #00ffff, #8dc26f); */
   font-family: "Roboto", sans-serif;
 }
 

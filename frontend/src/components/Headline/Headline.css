@@ -8,9 +8,7 @@ body {
 
 .headline {
   font-weight: bold;
-  font-size: 45px;
-  margin-top: 10px;
-  text-align: start;
+  font-size: 35px;
   color: #556080;
 }
 
@@ -18,20 +16,8 @@ body {
   margin: 0px;
 }
 
-.logout-btn {
-  padding: 8px;
-  font-size: 15px;
-  color: black;
-  border-radius: 10%;
-}
-
-.logout-btn:hover {
-  box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
-  color: black;
-  outline: none;
-}
-
 #logo {
-  width: 55px;
+  width: 45px;
   margin-left: 15px;
+  margin-bottom: 10px
 }

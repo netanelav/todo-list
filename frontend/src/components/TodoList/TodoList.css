@@ -1,15 +1,20 @@
+body {
+  background: linear-gradient(to right, rgb(226, 243, 248) 0%, rgb(231, 234, 235) 100%);
+}
+
 li {
   align-items: center;
   display: flex;
   margin: 4px;
-  background-color: lightgray;
-  font-family: 'Lato', sans-serif;
+  font-family: "Roboto", sans-serif;
   padding: 2px;
   font-size: 17px;
+  background: white;
+  border-radius: 10px;
 }
 
 li:hover {
-  box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 input,
@@ -24,7 +29,7 @@ button {
 
 .deadline {
   margin-left: auto;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .delete {

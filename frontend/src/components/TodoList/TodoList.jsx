@@ -43,7 +43,7 @@ class TodoList extends Component {
                   <span className={todo.starred ? "favorite" : "default"} onClick={() => this.handlePriority(todo)}/>
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.task}</span>
-                  <span className="deadline">{`target date ${this.formatDate(todo.deadline)}`}</span>
+                  <span className="deadline">{`due date ${this.formatDate(todo.deadline)}`}</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)} alt="delete"/>
                 </li>))}
             </ul>

@@ -2,9 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Anton&display=swap);
 
 body {
-  background: rgb(219, 226, 226);
-  /* background: #b5ee94; */
-  /* font-family: 'Lato', sans-serif; */
   font-family: "Roboto", sans-serif;
 }
 
@@ -26,18 +23,19 @@ input[type="date"] {
 
 .todo-title,
 .done-title {
-  color: #32ba7c;
-  /* font-family: 'Lato', sans-serif; */
+  color: #556080;
+  /* color: #32ba7c; */
   font-family: "Roboto", sans-serif;
   margin: 10px 0px;
   text-decoration: underline;
   font-size: 27px;
+  /* font-weight: bold; */
 }
 
 .todo-title {
-  color: #3db39e;
-}
 
+  /* color: #3db39e; */
+}
 
 #input {
   width: 50%;

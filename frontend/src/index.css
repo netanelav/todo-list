@@ -1,19 +1,22 @@
 .logout-btn {
   padding: 10px;
   font-size: 15px;
-  color: black;
   border-radius: 10%;
   position: absolute;
   top: 5px;
   right: 15px;
+  color: #556080;
+  font-weight: bold;
 }
 
 .logout-btn:hover {
   box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
-  color: black;
   outline: none;
 }
 
 #hellouser {
-  font-size:15px;
+  font-size:20px;
+  margin: 5px;
+  text-align: start;
+  color: #556080;
 }

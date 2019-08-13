@@ -13,7 +13,7 @@ class Headline extends Component {
             <img id="logo" src={Logo} alt="app logo" />
           </div>
           <div className="col-5">
-            <p className="headline">Todo List</p>
+            <p className="headline">Time to Get things Done!</p>
           </div>
         </div>
       </React.Fragment>

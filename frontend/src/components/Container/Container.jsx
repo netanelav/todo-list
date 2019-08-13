@@ -129,7 +129,7 @@ class Container extends Component {
       <Headline/>
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} ref={el => {this.input = el;}}/>
-          <span>target date:</span>
+          <span>due date:</span>
           <input id="input-date" type="date" onChange={this.getTodo} ref={el => {this.inputDate = el;}}/>
           <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">

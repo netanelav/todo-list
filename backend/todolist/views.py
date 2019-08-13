@@ -43,11 +43,8 @@ def create_todo(request):
 def delete_todo(request):
     try:
         data = json.loads(request.body)
-        todo_id = data["id"]
-        todo_to_delete = Todo(
-            id=data["id"])
-
-        Todo.objects.filter(id=todo_id).delete()
+        todo_to_delete = Todo(id=data["id"])
+        Todo.objects.filter(id=data["id"]).delete()
         return JsonResponse(model_to_dict(todo_to_delete), status=201)
     except Exception as ex:
         return JsonResponse({"error", ex}, status=500, safe=False)
@@ -57,23 +54,9 @@ def delete_todo(request):
 def change_status(request):
     try:
         data = json.loads(request.body)
-        if(data['completed']):
-            todo_updated = Todo(
-                id=data["id"],
-                task=data["task"],
-                deadline=data["deadline"],
-                starred=data["starred"],
-                completed=False,
-                user=request.user)
-        else:
-            todo_updated = Todo(
-                id=data["id"],
-                task=data["task"],
-                deadline=data["deadline"],
-                starred=data["starred"],
-                completed=True,
-                user=request.user)
-
+        data['completed'] = not data['completed']
+        data['user'] = request.user
+        todo_updated = Todo(**data)
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)
     except Exception as ex:
@@ -84,23 +67,9 @@ def change_status(request):
 def change_priority(request):
     try:
         data = json.loads(request.body)
-        if(data['starred']):
-            todo_updated = Todo(
-                id=data["id"],
-                task=data["task"],
-                deadline=data["deadline"],
-                starred=False,
-                completed=data["completed"],
-                user=request.user)
-        else:
-            todo_updated = Todo(
-                id=data["id"],
-                task=data["task"],
-                deadline=data["deadline"],
-                starred=True,
-                completed=data["completed"],
-                user=request.user)
-
+        data['starred'] = not data['starred']
+        data['user'] = request.user
+        todo_updated = Todo(**data)
         todo_updated.save()
         return JsonResponse(model_to_dict(todo_updated), status=201)
     except Exception as ex:

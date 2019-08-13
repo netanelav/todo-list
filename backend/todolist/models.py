@@ -10,5 +10,5 @@ class Todo(models.Model):
     completed = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return self.task
