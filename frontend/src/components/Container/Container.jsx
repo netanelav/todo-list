@@ -12,11 +12,12 @@ class Container extends Component {
     this.getTodo = this.getTodo.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.handlePriority = this.handlePriority.bind(this);
+    this.orderByPriority = this.orderByPriority.bind(this);
     this.handleStatus = this.handleStatus.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
     this.getTodos = this.getTodos.bind(this);
     this.getCompleted = this.getCompleted.bind(this);
-    this.clearInputs = this.clearInputs.bind(this)
+    this.clearInputs = this.clearInputs.bind(this);
 
     this.state = {
       todos: [],
@@ -92,6 +93,7 @@ class Container extends Component {
   }
   
   handlePriority(todoToChange) {
+    this.orderByPriority(todoToChange);
     api.changePriority(todoToChange,
       success => {
         todoToChange.starred ? (todoToChange.starred = false) : (todoToChange.starred = true);
@@ -99,6 +101,14 @@ class Container extends Component {
       },
       error => { console.log(error);}  
     );
+  }
+
+  orderByPriority(todo) {
+      let copiedArray = [...this.state.todos];
+      let index = copiedArray.findIndex(obj => obj.id == todo.id);
+      copiedArray.splice(index, 1);
+      todo.starred ? copiedArray.push(todo) : copiedArray.unshift(todo)
+      this.setState({ todos: [...copiedArray] });
   }
 
   handleRemove(todo) {

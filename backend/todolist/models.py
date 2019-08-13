@@ -6,7 +6,7 @@ class Todo(models.Model):
     task = models.CharField(max_length=500, null=False)
     deadline = models.DateField()
     creation = models.DateTimeField('date published', default=timezone.now)
-    starred = models.BooleanField(default=False)
+    starred = models.BooleanField('priority', default=False)
     completed = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

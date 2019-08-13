@@ -20,7 +20,7 @@ class SignUp(generic.CreateView):
 @login_required
 @require_http_methods(['GET'])
 def get_todos(request):
-    data = list(Todo.objects.filter(user=request.user).values())
+    data = list(Todo.objects.filter(user=request.user).values().order_by('-starred'))
     return JsonResponse({"todos": data})
 
 @login_required
