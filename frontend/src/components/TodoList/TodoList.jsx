@@ -44,7 +44,7 @@ class TodoList extends Component {
                   <input type="checkbox" onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.task}</span>
                   <span className="deadline">{`target date ${this.formatDate(todo.deadline)}`}</span>
-                  <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
+                  <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)} alt="delete"/>
                 </li>))}
             </ul>
           </div>
@@ -60,7 +60,7 @@ class TodoList extends Component {
                   <input type="checkbox" onChange={() => this.handleStatus(todo)} checked/>
                   <span className="completed">{todo.task}</span>
                   <span className="creation">{`created at ${this.formatDate(todo.creation)}`}</span>
-                  <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)}/>
+                  <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)} alt="delete"/>
                 </li>))}
             </ul>
           </div>

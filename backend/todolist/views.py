@@ -28,7 +28,6 @@ def get_todos(request):
 def create_todo(request):
     try:
         data = json.loads(request.body)
-        print(data)
         new_todo = Todo(
             task=data["task"],
             deadline=data["deadline"],
