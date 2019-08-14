@@ -123,13 +123,14 @@ class Container extends Component {
     );
   }
 
+
   render() {
     return (
       <React.Fragment>
       <Header/>
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} ref={el => {this.input = el;}}/>
-          <span><strong>due date:</strong></span>
+          <span className="label">due date:</span>
           <input id="input-date" type="date" onChange={this.getTodo} ref={el => {this.inputDate = el;}}/>
           <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">

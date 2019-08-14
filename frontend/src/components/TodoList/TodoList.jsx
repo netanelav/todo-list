@@ -41,7 +41,7 @@ class TodoList extends Component {
               {this.props.todos.map((todo, i) => (
                 <li key={i}>
                   <span className={todo.starred ? "favorite" : "default"} onClick={() => this.handlePriority(todo)}/>
-                  <input type="checkbox" onChange={() => this.handleStatus(todo)}/>
+                  <input type="checkbox" checked={false} onClick={() => this.handleStatus(todo)}/>
                   <span className="task">{todo.task}</span>
                   <span className="deadline">{`${this.formatDate(todo.deadline)}`}</span>
                   <img src={deleteIcon} className="delete" onClick={() => this.handleRemove(todo)} alt="delete"/>

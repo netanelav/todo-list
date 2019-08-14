@@ -16,9 +16,8 @@ ul {
 input[type="date"] {
   font-size: 18px;
   border: 1px solid #ecf0f1;
-  background: #e6ebec;
   color: #95a5a6;
-  text-align: center;
+  text-align: left;
 }
 
 .todo-title,
@@ -31,7 +30,7 @@ input[type="date"] {
 }
 
 #input {
-  width: 50%;
+  width: 40%;
   font-weight: bold;
   border: none;
   background: none;
@@ -48,10 +47,16 @@ input[type="date"] {
   margin: 5px;
   background-color: rgb(121, 235, 121);
   color: gray;
+  font-weight: bold;
 }
 
 .btn:hover {
   box-shadow: 1px 1px 9px -3px rgb(120, 120, 148);
   color: black;
   outline: none;
+}
+
+.label {
+  margin-left: 20px;
+  font-weight: bold;
 }

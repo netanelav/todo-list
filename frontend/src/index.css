@@ -1,5 +1,6 @@
 .logout-btn {
-  padding: 10px;
+  padding: 12px;
+  margin-right: 10px;
   font-size: 15px;
   border-radius: 10%;
   position: absolute;
@@ -15,9 +16,9 @@
 }
 
 #hellouser {
-  font-size:20px;
+  font-size: 20px;
   margin: 5px;
   text-align: start;
   color: #556080;
-  margin-left: 20px;
+  margin-left: 40px;
 }
