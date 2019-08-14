@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Logo from "../../images/list.svg";
 import "bootstrap/dist/css/bootstrap.css";
-import "./Headline.css";
+import "./Header.css";
 
-class Headline extends Component {
+class Header extends Component {
 
   render() {
     return (
@@ -21,6 +21,6 @@ class Headline extends Component {
   }
 }
 
-export default Headline;
+export default Header;
 
 

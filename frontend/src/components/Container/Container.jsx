@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Container.css";
-import Headline from "../Headline/Headline";
+import Header from "../Header/Header";
 import TodoList from "../TodoList/TodoList";
 import * as api from "../../utils/todolistApi"
 
@@ -126,10 +126,10 @@ class Container extends Component {
   render() {
     return (
       <React.Fragment>
-      <Headline/>
+      <Header/>
         <div className="container">
           <input id="input" type="text" placeholder={this.placeholder} ref={el => {this.input = el;}}/>
-          <span>due date:</span>
+          <span><strong>due date:</strong></span>
           <input id="input-date" type="date" onChange={this.getTodo} ref={el => {this.inputDate = el;}}/>
           <button className="btn" onClick={this.addTodo}>Add Todo</button>
           <div className="row">

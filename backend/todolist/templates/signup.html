@@ -19,12 +19,8 @@
           {% csrf_token %}
           {{ form.as_p }}
           <p id="error" style="display:none"></p>
-          <!-- <li>Your password can't be too similar to your other personal information.</li>
-          <li>Your password must contain at least 8 characters.</li>
-          <li>Your password can't be a commonly used password.</li>
-          <li>our password can't be entirely numeric.</li> -->
           <button id="create" type="submit" class="btn btn-success">CREATE</button>
-          <p class="message">Already registered? <a href="/accounts/login">Sign In</a></p>
+          <p class="message">Already registered? <a href="/todolist">Sign In</a></p>
         </form>
       </div>
     </div>

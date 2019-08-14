@@ -13,7 +13,10 @@ createBtn.addEventListener("click", function (e) {
         document.getElementById('error').innerHTML = "please enter at least 8 digits for password";
         showMsg(e);
     } else if (password != confirmation) {
-        document.getElementById('error').innerHTML = "password are not match, please make sure to type the same password for confirmation";
+        document.getElementById('error').innerHTML = "password doesn't match, please make sure to type the same password for confirmation";
+        showMsg(e);
+    } else {
+        document.getElementById('error').innerHTML = "password must contain numbers and letters";
         showMsg(e);
     }
 });

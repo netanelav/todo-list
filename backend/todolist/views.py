@@ -1,11 +1,10 @@
-from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.forms.models import model_to_dict
+from django.contrib.auth import authenticate, login
 from .models import Todo
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
@@ -14,8 +13,12 @@ import json
 
 class SignUp(generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = '/todolist'
     template_name = 'signup.html'
+    def form_valid(self, form):
+        valid = super().form_valid(form)
+        login(self.request, self.object)
+        return valid
 
 @login_required
 @require_http_methods(['GET'])
