@@ -15,10 +15,11 @@ createBtn.addEventListener("click", function (e) {
     } else if (password != confirmation) {
         document.getElementById('error').innerHTML = "password doesn't match, please make sure to type the same password for confirmation";
         showMsg(e);
-    } else {
-        document.getElementById('error').innerHTML = "password must contain numbers and letters";
-        showMsg(e);
     }
+    // } else {
+    //     document.getElementById('error').innerHTML = "password must contain numbers and letters";
+    //     showMsg(e);
+    // }
 });
 
 function showMsg(e) {
